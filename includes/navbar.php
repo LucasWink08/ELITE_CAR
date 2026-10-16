@@ -1,61 +1,61 @@
-
-
-<body class="bg-gradient-to-t from-black to-gray-900 text-white min-h-screen">
-<div class="bg-black p-3">
-    <div class="flex justify-between items-center">
-        <div class="w">
-            <ul class="flex items-center space-x-2">
-                <li id="luxo" class="text-2xl text-white tracking-wider">
-                    <h1>LXC</h1>
-                </li>
-                <li>
-                    <a href="../paginas/homepage.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                        <path d="M160-120v-480L480-840l320 240v480H540v-240H420v240H160Zm60-60h140v-240h200v240h140v-390L480-780 220-570v390Zm140 0h200-200Z"/>
-                    </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="hidden md:block">
-            <ul class="flex space-x-5 text-white">
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/paginadecompra.php" class="hover:text-yellow-500 transition duration-150 ease-in-out">COMPRAR</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/anunciar.php" class="hover:text-yellow-500">ANUNCIAR</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/tabelafipe.php" class="hover:text-yellow-500">TABELA FIPE</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/contato.php" class="hover:text-yellow-500">CONTATO</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/seguroveic.php" class="hover:text-yellow-500">Calcule seu seguro</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../paginas/desavalveic.php" class="hover:text-yellow-500">desvalorização do veiculo</a></p></li>
-            </ul>
-        </div>
-        <div>
-            <ul class="flex items-center space-x-1">
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323">
-                        <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-                    </svg>
-                </li>
-                <li class="gtimes">
-                    <p class="hover-effectt"><p class="text-white hover:text-yellow-500"><?php
-                    session_start();
-                    if(isset($_SESSION['usuario'])){
-                        $usuario=$_SESSION['usuario'];
-                        echo "<p class='gtimes'>$usuario</p>";
-                    }
-                    else{
-                        echo "<a href='../paginas/entrar.php'>ENTRAR</a>";
-                    }
-                    ?></p></p>
-                </li>     
-            </ul>
-        </div> 
-    </div>
-</div>
 <?php
-if(isset($_SESSION['usuario'])){
-echo "<p class='gtimes text-center mt-10 -mb-10 text-6xl'>Seja bem vindo, $usuario!</p>";
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
 }
-else{
-     echo "<p class='gtimes text-center mt-10 -mb-10 text-6xl'>Seja bem vindo!</p>";
-}
-?>
 
+$luxcarsScriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? ''));
+$luxcarsPagesPosition = strpos($luxcarsScriptName, '/paginas/');
+$luxcarsBasePath = $luxcarsPagesPosition === false
+    ? '/'
+    : substr($luxcarsScriptName, 0, $luxcarsPagesPosition + 1);
+$luxcarsEscape = static fn (mixed $value): string => htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+$luxcarsUsuario = isset($_SESSION['usuario']) && is_string($_SESSION['usuario'])
+    ? $_SESSION['usuario']
+    : null;
+$luxcarsAutenticado = $luxcarsUsuario !== null && isset($_SESSION['usuario_id']);
+$luxcarsPagina = static fn (string $pagina): string => $luxcarsBasePath . 'paginas/' . $pagina;
+?>
+<header class="luxcars-site-header">
+    <nav class="luxcars-site-nav" aria-label="Navega&ccedil;&atilde;o principal">
+        <a class="luxcars-site-nav__brand" href="<?= $luxcarsEscape($luxcarsPagina('homepage.php')) ?>" aria-label="LuxCars, p&aacute;gina inicial">LUXCARS</a>
+        <button class="luxcars-site-nav__toggle" type="button" data-luxcars-menu-toggle aria-controls="luxcars-menu" aria-expanded="false" aria-label="Abrir menu">
+            <span aria-hidden="true">&#9776;</span>
+        </button>
+        <div class="luxcars-site-nav__links" id="luxcars-menu" data-luxcars-menu>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('homepage.php')) ?>">In&iacute;cio</a>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('paginadecompra.php')) ?>">Comprar</a>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('anunciar.php')) ?>">Anunciar</a>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('tabelafipe.php')) ?>">Tabela FIPE</a>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('seguroveic.php')) ?>">Agendar test drive</a>
+            <a href="<?= $luxcarsEscape($luxcarsPagina('contato.php')) ?>">Contato</a>
+            <span class="luxcars-site-nav__divider" aria-hidden="true"></span>
+            <?php if ($luxcarsAutenticado): ?>
+                <span class="luxcars-site-nav__greeting">Ol&aacute;, <?= $luxcarsEscape($luxcarsUsuario) ?></span>
+                <a href="<?= $luxcarsEscape($luxcarsPagina('perfil.php')) ?>">Meu perfil</a>
+                <a href="<?= $luxcarsEscape($luxcarsPagina('carrinho.php')) ?>">Carrinho</a>
+                <?php if (($_SESSION['usuario_tipo'] ?? null) === 'admin'): ?>
+                    <a href="<?= $luxcarsEscape($luxcarsPagina('admin_carros.php')) ?>">Administra&ccedil;&atilde;o</a>
+                <?php endif; ?>
+                <form class="luxcars-site-nav__logout" action="<?= $luxcarsEscape($luxcarsPagina('sair.php')) ?>" method="post">
+                    <button type="submit">Sair</button>
+                </form>
+            <?php else: ?>
+                <a href="<?= $luxcarsEscape($luxcarsPagina('entrar.php')) ?>">Entrar</a>
+                <a href="<?= $luxcarsEscape($luxcarsPagina('cadastro.php')) ?>">Criar conta</a>
+            <?php endif; ?>
+        </div>
+    </nav>
+</header>
+<script>
+(() => {
+    const button = document.querySelector('[data-luxcars-menu-toggle]');
+    const menu = document.querySelector('[data-luxcars-menu]');
+    if (!button || !menu) return;
+    button.addEventListener('click', () => {
+        const open = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!open));
+        button.setAttribute('aria-label', open ? 'Abrir menu' : 'Fechar menu');
+        menu.classList.toggle('is-open', !open);
+    });
+})();
+</script>

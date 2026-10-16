@@ -4,7 +4,7 @@
    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 items-center justify-center mt-4">
        
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/bmw/2020-bmw-x6-m-competition-1.webp" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bmw x6 competition</h2>
@@ -23,7 +23,7 @@
         </div>
 
        
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/destaques/r8v10.webp" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">Audi r8 gt</h2>
@@ -42,7 +42,7 @@
         </div>
 
        
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/audi/mtmrs6evo.jpg" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi mtm rs6 evo</h2>
@@ -61,7 +61,7 @@ Velocidade máxima : Acima de 330 km/h
         </div>
 
        
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/ferrari/ferrari-488 pista.jpg" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">ferrari 488 pista</h2>
@@ -79,7 +79,7 @@ Velocidade máxima : Acima de 330 km/h
         </div>
 
         
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/destaques/bmw m5cs.webp" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">BMW m5 cs</h2>
@@ -98,7 +98,7 @@ Velocidade máxima : Acima de 330 km/h
         </div>
 
        
-        <div class="w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card luxcars-car-card--compact w-60 p-2 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../assets/imagens/cars/destaques/ferrari la ferrari.webp" alt="" class="h-40 object-cover rounded-xl">
             <div class="p-2 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">"la" ferrari</h2>

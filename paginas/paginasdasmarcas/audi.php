@@ -34,60 +34,13 @@
         }
     
    </style>
+<link rel="stylesheet" href="../../assets/css/site.css">
 </head>
 <body class="bg-gradient-to-t from-black to-gray-900 text-white min-h-screen">
-<div class="bg-black p-3">
-    <div class="flex justify-between items-center">
-        <div class="w">
-            <ul class="flex items-center space-x-2">
-                <li id="luxo" class="text-2xl text-white tracking-wider">
-                    <h1>LXC</h1>
-                </li>
-                <li>
-                    <a href="../../paginas/homepage.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                        <path d="M160-120v-480L480-840l320 240v480H540v-240H420v240H160Zm60-60h140v-240h200v240h140v-390L480-780 220-570v390Zm140 0h200-200Z"/>
-                    </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="hidden md:block">
-            <ul class="flex space-x-5 text-white">
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/paginadecompra.php" class="hover:text-yellow-500 transition duration-150 ease-in-out">COMPRAR</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/anunciar.php" class="hover:text-yellow-500">ANUNCIAR</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/tabelafipe.php" class="hover:text-yellow-500">TABELA FIPE</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/contato.php" class="hover:text-yellow-500">CONTATO</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/seguroveic.php" class="hover:text-yellow-500">Calcule seu seguro</a></p></li>
-                <li class="gtimes"><p class="hover-effect"><a href="../../paginas/desavalveic.php" class="hover:text-yellow-500">desvalorização do veiculo</a></p></li>
-            </ul>
-        </div>
-        <div><a href=""></a>
-            <ul class="flex items-center space-x-1">
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323">
-                        <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-                    </svg>
-                </li>
-                <li class="gtimes">
-                    <p class="hover-effectt"><p class="text-white hover:text-yellow-500"><?php
-                    session_start();
-                    if(isset($_SESSION['usuario'])){
-                        $usuario=$_SESSION['usuario'];
-                        echo "<p class='gtimes'>$usuario</p>";
-                    }
-                    else{
-                        echo "<a href='../paginas/entrar.php'>ENTRAR</a>";
-                    }
-                    ?></p></p>
-                </li>     
-            </ul>
-        </div> 
-    </div>
-</div>
+<?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/2023-audi-r8-gt-front-three-quarters-motion-3-1664827965.avif" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">Audi r8 gt</h2>
@@ -101,12 +54,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$1.850.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audir8gt.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2F2023-audi-r8-gt-front-three-quarters-motion-3-1664827965.avif" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/audi-rs6-avant-gt.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs6 avant</h2>
@@ -120,12 +73,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$1.350.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirs6avant.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Faudi-rs6-avant-gt.jpg" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/audi-tt rs.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi tt rs</h2>
@@ -139,12 +92,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$455.800</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audittrs.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Faudi-tt%20rs.jpg" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/mtmrs6evo.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi mtm rs6 evo</h2>
@@ -158,12 +111,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$ 1.500.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audimtmrs6.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Fmtmrs6evo.jpg" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/nova-audi-rs6-avant-performance-frente.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs6 avant</h2>
@@ -177,12 +130,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 "> R$ 1.400.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirs6avant2.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Fnova-audi-rs6-avant-performance-frente.webp" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/RS3 Sportback 12021.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs3 Sportback</h2>
@@ -196,12 +149,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$ 450.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirs3sportback.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2FRS3%20Sportback%2012021.jpg" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/rs4-avant_2.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs4 avant</h2>
@@ -215,12 +168,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$ 700.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirs4avant.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Frs4-avant_2.jpg" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/rs7 2025.avif" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs7</h2>
@@ -234,12 +187,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$ 1.200.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirs7.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Frs7%202025.avif" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/image.png" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi r8</h2>
@@ -253,12 +206,12 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$1.250.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audir8.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Fimage.png" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
         </div>
-        <div class="max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/audi/rs32025.png" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">audi rs3 </h2>
@@ -273,7 +226,7 @@
                 <p class="text-black text-2xl gtimes -mb-4 mt-16 ">R$450.000</p>
             </div>
             <div class="mt-4 w-full">
-                <a href="../anuncios/audi/audirss3.php" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
+                <a href="../detalhes.php?imagem=assets%2Fimagens%2Fcars%2Faudi%2Frs32025.png" class="block bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-500 focus:scale-95 transition-all duration-250 ease-out shadow-md text-center gtimes">
                     Ver Mais
                 </a>
             </div>
