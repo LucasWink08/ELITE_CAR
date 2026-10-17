@@ -29,46 +29,167 @@ a:hover { opacity: .88; }
     top: 0;
     z-index: 1000;
     width: 100%;
-    border-bottom: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.12);
     color: #f7f7f8;
-    background: rgba(0,0,0,.97);
+    background: rgba(5,5,6,.94);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
 }
 .luxcars-site-nav {
-    display: flex;
-    width: min(100%, 1280px);
-    min-height: 52px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    width: 100%;
+    min-height: 76px;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-    margin: 0 auto;
-    padding: .45rem 1.25rem;
+    gap: clamp(2rem, 5vw, 5rem);
+    margin: 0;
+    padding: .65rem clamp(1rem, 2vw, 2rem);
     font-family: Arial, Helvetica, sans-serif;
 }
 .luxcars-site-nav a,
 .luxcars-site-nav button {
     color: #f7f7f8;
     font: inherit;
-    font-size: .94rem;
+    font-size: .875rem;
     line-height: 1.25;
     text-decoration: none;
     white-space: nowrap;
 }
 .luxcars-site-nav a:hover,
-.luxcars-site-nav button:hover { color: #c9cbd0; opacity: 1; }
+.luxcars-site-nav button:hover { color: #d8d9dc; opacity: 1; }
 .luxcars-site-nav__brand {
     flex: 0 0 auto;
-    font-size: 1.5rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .08em;
+    display: block;
+    width: 180px;
+    height: 64px;
+    overflow: hidden;
+}
+.luxcars-site-nav__brand img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    mix-blend-mode: screen;
+    object-fit: cover;
+    object-position: center 68%;
 }
 .luxcars-site-nav__links {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+.luxcars-site-nav__primary,
+.luxcars-site-nav__account {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: clamp(.55rem, 1vw, 1rem);
 }
-.luxcars-site-nav__divider { width: 1px; height: 1.1rem; background: rgba(255,255,255,.35); }
-.luxcars-site-nav__greeting { color: #dddfe3; font-size: .94rem; white-space: nowrap; }
+.luxcars-site-nav__primary { gap: clamp(.85rem, 1.6vw, 1.6rem); }
+.luxcars-site-nav__account { justify-self: end; gap: 1rem; }
+.luxcars-site-nav__primary a,
+.luxcars-site-nav__account > a {
+    position: relative;
+    color: #d1d2d5;
+    transition: color .18s ease;
+}
+.luxcars-site-nav__primary a::after,
+.luxcars-site-nav__account > a::after {
+    position: absolute;
+    right: 0;
+    bottom: -.45rem;
+    left: 0;
+    height: 1px;
+    background: #f4f4f5;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+}
+.luxcars-site-nav__primary a:hover,
+.luxcars-site-nav__account > a:hover { color: #fff; }
+.luxcars-site-nav__primary a:hover::after,
+.luxcars-site-nav__account > a:hover::after { transform: scaleX(1); }
+.luxcars-auth-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.luxcars-auth-menu__toggle {
+    display: inline-flex;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: 0 .65rem;
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 999px;
+    color: #f7f7f8 !important;
+    background: rgba(255,255,255,.045);
+    cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.luxcars-auth-menu__toggle:hover {
+    border-color: rgba(255,255,255,.55);
+    color: #fff !important;
+    background: rgba(255,255,255,.1);
+    opacity: 1;
+}
+.luxcars-auth-menu__label { display: none; }
+.luxcars-auth-menu__dropdown {
+    position: absolute;
+    z-index: 1001;
+    top: calc(100% + .6rem);
+    right: 0;
+    display: grid;
+    width: max-content;
+    min-width: 11.5rem;
+    gap: .2rem;
+    padding: .45rem;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: .85rem;
+    background: rgba(15,16,18,.98);
+    box-shadow: 0 16px 36px rgba(0,0,0,.42);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-.3rem);
+    transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+    visibility: hidden;
+}
+.luxcars-auth-menu__dropdown::before {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: .7rem;
+    content: "";
+}
+.luxcars-auth-menu__dropdown a {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    padding: 0 .8rem;
+    border-radius: .5rem;
+    color: #d1d2d5;
+    font-weight: 500;
+    transition: color .16s ease, background-color .16s ease;
+}
+.luxcars-auth-menu__dropdown a:hover,
+.luxcars-auth-menu__dropdown a:focus-visible {
+    color: #fff;
+    background: rgba(255,255,255,.09);
+    opacity: 1;
+}
+.luxcars-auth-menu.is-open .luxcars-auth-menu__dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+}
+.luxcars-site-nav__divider { width: 1px; height: 1.35rem; background: rgba(255,255,255,.22); }
+.luxcars-site-nav__greeting { color: #aeb3bc; font-size: .875rem; white-space: nowrap; }
 .luxcars-site-nav__logout { display: inline-flex; margin: 0; }
 .luxcars-site-nav__logout button {
     padding: 0;
@@ -77,28 +198,76 @@ a:hover { opacity: .88; }
     cursor: pointer;
 }
 .luxcars-site-nav__toggle { display: none; }
+.luxcars-site-nav a:focus-visible,
+.luxcars-site-nav button:focus-visible {
+    outline: 2px solid #f4f4f5;
+    outline-offset: 4px;
+}
 
-@media (max-width: 960px) {
-    .luxcars-site-nav { position: relative; flex-wrap: wrap; gap: .5rem; }
+@media (max-width: 1100px) {
+    .luxcars-site-nav {
+        position: relative;
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: 68px;
+        gap: .5rem;
+    }
     .luxcars-site-nav__toggle {
         display: grid;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.75rem;
+        height: 2.75rem;
         place-items: center;
-        margin-left: auto;
-        border: 1px solid rgba(255,255,255,.25);
-        border-radius: .5rem;
+        border: 1px solid rgba(255,255,255,.22);
+        border-radius: 50%;
         color: #fff;
-        background: transparent;
+        background: rgba(255,255,255,.045);
         cursor: pointer;
     }
-    .luxcars-site-nav__links { display: none; width: 100%; flex-wrap: wrap; justify-content: flex-start; padding: .6rem 0 .3rem; }
-    .luxcars-site-nav__links.is-open { display: flex; }
+    .luxcars-site-nav__links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: .75rem clamp(1.25rem, 4vw, 3.5rem) 1.25rem;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+        background: rgba(5,5,6,.98);
+        box-shadow: 0 18px 28px rgba(0,0,0,.35);
+    }
+    .luxcars-site-nav__links.is-open { display: grid; }
+    .luxcars-site-nav__primary,
+    .luxcars-site-nav__account { flex-wrap: wrap; gap: .25rem; }
+    .luxcars-site-nav__primary { padding-bottom: .75rem; }
+    .luxcars-site-nav__account {
+        padding-top: .75rem;
+        border-top: 1px solid rgba(255,255,255,.14);
+    }
+    .luxcars-site-nav__primary a,
+    .luxcars-site-nav__account > a,
+    .luxcars-site-nav__greeting,
+    .luxcars-site-nav__logout button {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        padding: 0 .75rem;
+    }
+    .luxcars-site-nav__primary a::after,
+    .luxcars-site-nav__account > a::after { display: none; }
+    .luxcars-site-nav__divider { display: none; }
 }
 @media (max-width: 560px) {
-    .luxcars-site-nav { padding: .4rem .85rem; }
-    .luxcars-site-nav__links { align-items: flex-start; flex-direction: column; gap: .85rem; }
-    .luxcars-site-nav__divider { width: 100%; height: 1px; }
+    .luxcars-site-nav { padding: .55rem 1rem; }
+    .luxcars-site-nav__brand { width: min(180px, 40vw); height: min(64px, 14.22vw); }
+    .luxcars-site-nav__links { padding-right: 1rem; padding-left: 1rem; }
+    .luxcars-site-nav__primary,
+    .luxcars-site-nav__account { align-items: stretch; flex-direction: column; }
+    .luxcars-site-nav__primary a,
+    .luxcars-site-nav__account > a,
+    .luxcars-site-nav__greeting,
+    .luxcars-site-nav__logout button { width: 100%; justify-content: flex-start; }
+    .luxcars-auth-menu__label { display: inline; }
+    .luxcars-auth-menu__dropdown { right: auto; left: 0; }
 }
 
 /* The site keeps its monochrome luxury palette across Tailwind and legacy pages. */
@@ -193,11 +362,11 @@ a:hover { opacity: .88; }
     transform: translateY(-2px);
 }
 .luxcars-brands-section {
-    color: #252831;
-    background: #fff;
-    border: 1px solid rgba(255,255,255,.8);
-    border-radius: 1.5rem;
-    box-shadow: 0 14px 36px rgba(0,0,0,.2);
+    color: #f5f6f8;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 .luxcars-brands-section h2 { color: #252831; }
 .luxcars-brand-tile img {
@@ -736,4 +905,200 @@ body.luxcars-vehicle-page { margin: 0; font-family: Inter, "Segoe UI", Roboto, H
     .luxcars-vehicle-gallery__item { flex-basis: 88%; }
     .luxcars-vehicle-info { padding: 1.2rem; }
     .luxcars-vehicle-contact { padding: 1.2rem; }
+}
+
+/* Premium vehicle listing details */
+.luxcars-vehicle-detail__layout {
+    width: min(100% - 3rem, 84rem);
+    margin-top: -3rem;
+    grid-template-columns: minmax(0, 1.45fr) minmax(21rem, .78fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.luxcars-vehicle-info {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.5rem, 3.4vw, 3rem);
+    border: 1px solid #e8e5de;
+    border-radius: 1.15rem;
+    background: linear-gradient(145deg, #fff 0%, #fbfaf7 100%);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, .2);
+}
+
+.luxcars-vehicle-info::before {
+    position: absolute;
+    top: 0;
+    left: clamp(1.5rem, 3.4vw, 3rem);
+    width: 3.4rem;
+    height: 3px;
+    background: linear-gradient(90deg, #a88638, #ddc77d);
+    content: "";
+}
+
+.luxcars-vehicle-info__eyebrow,
+.luxcars-vehicle-contact__eyebrow {
+    font-size: .68rem;
+    letter-spacing: .19em;
+}
+
+.luxcars-vehicle-info__eyebrow { color: #8b7138; }
+.luxcars-vehicle-info h1 { margin-top: .85rem; font-size: clamp(2.25rem, 4vw, 3.6rem); letter-spacing: -.055em; }
+.luxcars-vehicle-info__version { margin-top: .7rem; color: #6b675f; font-size: 1rem; }
+.luxcars-vehicle-info__description { max-width: 54rem; margin-top: 1.1rem; color: #60636a; font-size: .94rem; line-height: 1.8; }
+.luxcars-vehicle-info h2 { display: flex; align-items: center; gap: .75rem; margin: 2rem 0 1rem; font-size: .98rem; letter-spacing: -.01em; }
+.luxcars-vehicle-info h2::after { height: 1px; flex: 1; background: #e8e5de; content: ""; }
+
+.luxcars-vehicle-specs { gap: .7rem; }
+.luxcars-vehicle-specs > div {
+    min-height: 4.25rem;
+    padding: .9rem 1rem;
+    border-color: #e9e6df;
+    border-radius: .82rem;
+    background: rgba(255, 255, 255, .82);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.luxcars-vehicle-specs > div:hover { transform: translateY(-2px); border-color: #d5c99f; box-shadow: 0 8px 20px rgba(40, 34, 20, .06); }
+.luxcars-vehicle-specs dt { color: #858078; font-size: .7rem; letter-spacing: .025em; }
+.luxcars-vehicle-specs dd { margin-top: .35rem; color: #191a1d; font-size: .94rem; font-weight: 700; }
+.luxcars-vehicle-info__extra { padding: .1rem 1.2rem 1.15rem; border-left-width: 3px; border-color: #b89b4a; border-radius: 0 .8rem .8rem 0; background: #f8f6f0; }
+.luxcars-vehicle-info__extra h2 { margin-top: 1rem; }
+.luxcars-vehicle-info__availability { width: fit-content; margin-top: 1.5rem; padding: .55rem .8rem; border: 1px solid #e2e9e1; border-radius: 999px; color: #48634e; background: #f3f8f1; font-size: .78rem; }
+.luxcars-vehicle-info__availability span { width: .48rem; height: .48rem; }
+
+.luxcars-vehicle-contact {
+    top: 6rem;
+    padding: clamp(1.45rem, 2.5vw, 2rem);
+    border: 1px solid rgba(232, 229, 222, .95);
+    border-radius: 1.15rem;
+    background: linear-gradient(155deg, #fff 0%, #f8f7f3 100%);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, .22);
+}
+.luxcars-vehicle-contact__eyebrow { color: #917639; }
+.luxcars-vehicle-contact__price { margin: .55rem 0 1.5rem; color: #111214; font-size: clamp(1.9rem, 3vw, 2.55rem); line-height: 1.08; font-variant-numeric: tabular-nums; }
+.luxcars-vehicle-contact h2 { font-size: 1.2rem; letter-spacing: -.025em; }
+.luxcars-vehicle-contact__intro { margin: .45rem 0 1.35rem; color: #71716f; font-size: .85rem; line-height: 1.65; }
+.luxcars-vehicle-contact__form { gap: .85rem; }
+.luxcars-vehicle-contact__form label { gap: .45rem; color: #383a3f; font-size: .75rem; font-weight: 700; }
+.luxcars-vehicle-contact__form input:not([type="hidden"]):not([type="submit"]):not([type="button"]),
+.luxcars-vehicle-contact__form textarea {
+    min-height: 3.1rem;
+    padding: .78rem .85rem;
+    border: 1px solid #e1ded6 !important;
+    border-radius: .72rem;
+    color: #1c1d20 !important;
+    background: #f7f6f2 !important;
+    color-scheme: light;
+    font-size: .87rem;
+}
+.luxcars-vehicle-contact__form textarea { min-height: 6.5rem; line-height: 1.55; }
+.luxcars-vehicle-contact__form input::placeholder,
+.luxcars-vehicle-contact__form textarea::placeholder { color: #8a8984; }
+.luxcars-vehicle-contact .luxcars-vehicle-contact__form input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]):focus,
+.luxcars-vehicle-contact__form textarea:focus { border-color: #a98b45 !important; box-shadow: 0 0 0 3px rgba(169, 139, 69, .13); }
+.luxcars-vehicle-contact__form > button,
+.luxcars-vehicle-contact__secondary {
+    min-height: 3.2rem;
+    border: 1px solid #17181b;
+    border-radius: .72rem;
+    color: #fff;
+    background: #17181b;
+    font-size: .87rem;
+    font-weight: 700;
+    transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.luxcars-vehicle-contact__form > button:hover,
+.luxcars-vehicle-contact__secondary:hover { transform: translateY(-1px); border-color: #c2a451; color: #17181b; background: #d8bf72; }
+.luxcars-vehicle-contact__actions { gap: .65rem; margin-top: .8rem; }
+.luxcars-vehicle-contact__actions > a,
+.luxcars-vehicle-contact__account-actions button {
+    padding: .78rem .9rem;
+    border-color: #e1ded6;
+    border-radius: .72rem;
+    color: #3e4044;
+    background: rgba(255, 255, 255, .65);
+    font-size: .8rem;
+    transition: border-color .18s ease, color .18s ease, background-color .18s ease;
+}
+.luxcars-vehicle-contact__actions > a:hover,
+.luxcars-vehicle-contact__account-actions button:hover { border-color: #c6ad68; color: #17181b; background: #fff; }
+.luxcars-vehicle-contact__account-actions { gap: .55rem; }
+
+@media (max-width: 760px) {
+    .luxcars-vehicle-detail__layout { width: min(100% - 1.5rem, 44rem); margin-top: -1.2rem; gap: 1rem; }
+    .luxcars-vehicle-info { padding: 1.5rem; }
+    .luxcars-vehicle-info::before { left: 1.5rem; }
+    .luxcars-vehicle-contact { top: auto; }
+}
+
+@media (max-width: 420px) {
+    .luxcars-vehicle-info { padding: 1.25rem; }
+    .luxcars-vehicle-info::before { left: 1.25rem; }
+    .luxcars-vehicle-contact { padding: 1.25rem; }
+    .luxcars-vehicle-info h1 { font-size: 2rem; }
+}
+
+/* Full-width brand selector with dimensional emblem badges */
+.luxcars-brands-section.luxcars-brands-section {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 2.4rem clamp(1rem, 4vw, 4rem) 3rem;
+    border: 0;
+    border-radius: 0;
+    color: #f5f6f8;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.luxcars-brands-section h2 { color: #f5f6f8; }
+.luxcars-brands-section > div:first-child > a { color: #d9c27c; }
+.luxcars-brands-section > .grid {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 1.25rem clamp(.5rem, 2vw, 2rem);
+}
+.luxcars-brand-tile {
+    min-height: 0;
+    gap: 0;
+    perspective: 900px;
+    color: #e5e7eb !important;
+    font-weight: 600;
+    transition: color .2s ease;
+}
+.luxcars-brands-section .luxcars-brand-tile { padding: 0; }
+.luxcars-brand-tile:hover { color: #f1d987 !important; transform: none; }
+.luxcars-brand-tile img {
+    box-sizing: border-box;
+    width: clamp(7rem, 10.5vw, 9rem);
+    height: clamp(7rem, 10.5vw, 9rem);
+    padding: .85rem;
+    border: 1px solid rgba(255, 255, 255, .82);
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 23%, #fff 0%, #f1f2f3 42%, #d8dbe0 100%);
+    box-shadow: 0 13px 24px rgba(0, 0, 0, .38), inset 0 2px 4px rgba(255, 255, 255, .95), inset 0 -9px 16px rgba(65, 70, 78, .2);
+    object-fit: contain;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    transition: box-shadow .3s ease, filter .3s ease, transform .3s ease;
+}
+.luxcars-brand-tile:hover img {
+    animation: luxcars-brand-float 1.8s ease-in-out infinite;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, .48), inset 0 2px 5px rgba(255, 255, 255, .98), inset 0 -9px 16px rgba(65, 70, 78, .18);
+    filter: saturate(1.05);
+}
+@keyframes luxcars-brand-float {
+    0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+    50% { transform: translateY(-5px) rotateX(4deg) rotateY(-3deg); }
+}
+@media (max-width: 1000px) {
+    .luxcars-brands-section > .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+    .luxcars-brands-section.luxcars-brands-section { padding: 2rem 1rem 2.4rem; }
+    .luxcars-brands-section > .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem .5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .luxcars-brand-tile, .luxcars-brand-tile img { transition: none; }
+    .luxcars-brand-tile:hover img { animation: none; }
 }

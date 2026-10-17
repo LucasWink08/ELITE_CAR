@@ -14,7 +14,7 @@ function luxcarsHomeEscape(mixed $value): string
     <meta name="description" content="Encontre veículos premium na LuxCars. Explore o catálogo e consulte os detalhes de cada modelo.">
     <title>LuxCars | Veículos premium</title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261017-brands-2">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gray-950 text-white">
@@ -99,8 +99,7 @@ function luxcarsHomeEscape(mixed $value): string
             foreach ($marcas as [$nome, $slug, $arquivo]):
             ?>
                 <a class="luxcars-brand-tile flex min-h-28 flex-col items-center justify-center gap-2 p-2 text-center text-sm font-semibold text-gray-900" href="paginasdasmarcas/<?= luxcarsHomeEscape($slug) ?>.php">
-                    <img class="h-14 w-16 object-contain" src="../assets/imagens/logos/<?= rawurlencode($arquivo) ?>" alt="" loading="lazy">
-                    <?= luxcarsHomeEscape($nome) ?>
+                    <img class="h-14 w-16 object-contain" src="../assets/imagens/logos/<?= rawurlencode($arquivo) ?>" alt="<?= luxcarsHomeEscape($nome) ?>" loading="lazy">
                 </a>
             <?php endforeach; ?>
         </div>
