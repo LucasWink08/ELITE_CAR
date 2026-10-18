@@ -14,7 +14,7 @@ function luxcarsHomeEscape(mixed $value): string
     <meta name="description" content="Encontre veículos premium na LuxCars. Explore o catálogo e consulte os detalhes de cada modelo.">
     <title>LuxCars | Veículos premium</title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261017-brands-2">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261018-home-search-news">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gray-950 text-white">
@@ -82,6 +82,34 @@ function luxcarsHomeEscape(mixed $value): string
             restart();
         })();
     </script>
+
+    <section class="luxcars-search-section" aria-labelledby="busca-home-titulo">
+        <div class="luxcars-search-panel">
+            <div class="luxcars-search-panel__header">
+                <div>
+                    <p class="luxcars-search-panel__eyebrow">Seu pr&oacute;ximo carro come&ccedil;a aqui</p>
+                    <h2 id="busca-home-titulo">Encontre o carro que voc&ecirc; procura</h2>
+                </div>
+                <div class="luxcars-search-panel__types" role="group" aria-label="Tipo de ve&iacute;culo">
+                    <span class="luxcars-search-panel__type is-active">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 13.5 5.3 9.8a2 2 0 0 1 1.9-1.3h9.6a2 2 0 0 1 1.9 1.3l1.3 3.7v5h-2v-2H6v2H4v-5Z"/><path d="M5 13h14M7.5 16.5h.01M16.5 16.5h.01"/></svg>
+                        Carros <span><?= number_format(count($carros), 0, ',', '.') ?></span>
+                    </span>
+                    <span class="luxcars-search-panel__type is-disabled" title="Busca por motos em breve">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="16" r="3.2"/><circle cx="18" cy="16" r="3.2"/><path d="m6 16 4-6h4l4 6m-8-6-2-3h3m3 3 2-2h2"/></svg>
+                        Motos <small>em breve</small>
+                    </span>
+                </div>
+            </div>
+            <form class="luxcars-search-form" action="paginadecompra.php" method="get" role="search">
+                <label class="sr-only" for="busca-veiculos">Buscar por marca, modelo, cor ou ano</label>
+                <svg class="luxcars-search-form__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+                <input id="busca-veiculos" type="search" name="termo" maxlength="120" placeholder="Ex.: Porsche Taycan ou BMW M4" autocomplete="off">
+                <button type="submit">Buscar ve&iacute;culos</button>
+            </form>
+            <p class="luxcars-search-panel__hint">Pesquise por marca, modelo, cor, ano ou palavra da descri&ccedil;&atilde;o.</p>
+        </div>
+    </section>
 
     <section class="luxcars-brands-section mx-auto max-w-[1800px] px-6 py-10" aria-labelledby="marcas-titulo">
         <div class="mb-7 flex flex-wrap items-end justify-between gap-4">
@@ -171,6 +199,67 @@ function luxcarsHomeEscape(mixed $value): string
             updateArrows();
         })();
     </script>
+
+    <section class="luxcars-news-section" aria-labelledby="noticias-titulo">
+        <div class="luxcars-news-section__heading">
+            <div>
+                <p class="luxcars-news-section__eyebrow">Giro automotivo</p>
+                <h2 id="noticias-titulo">Not&iacute;cias do mundo automotivo</h2>
+                <p>Lan&ccedil;amentos, tecnologia e novidades da ind&uacute;stria.</p>
+            </div>
+            <span class="luxcars-news-section__badge">Not&iacute;cias em portugu&ecirc;s</span>
+        </div>
+
+        <?php if ($noticias === []): ?>
+            <p class="luxcars-news-empty">As not&iacute;cias automotivas n&atilde;o est&atilde;o dispon&iacute;veis agora. Tente novamente em instantes.</p>
+        <?php else: ?>
+            <div class="luxcars-news-grid">
+                <?php foreach ($noticias as $noticia): ?>
+                    <?php
+                    $tituloNoticia = (string) ($noticia['titulo'] ?? 'Noticia automotiva');
+                    $dataNoticia = (string) ($noticia['publicado_em'] ?? '');
+                    $dataIsoNoticia = '';
+                    $dataFormatadaNoticia = 'Data nao informada';
+                    if ($dataNoticia !== '') {
+                        try {
+                            $dataObjetoNoticia = new DateTimeImmutable($dataNoticia, new DateTimeZone('America/Sao_Paulo'));
+                            $dataIsoNoticia = $dataObjetoNoticia->format('c');
+                            $dataFormatadaNoticia = $dataObjetoNoticia->format('d/m/Y');
+                        } catch (Throwable) {
+                        }
+                    }
+                    ?>
+                    <article class="luxcars-news-card">
+                        <a class="luxcars-news-card__media" href="<?= luxcarsHomeEscape($noticia['url_original']) ?>" target="_blank" rel="noopener noreferrer" aria-label="Ler: <?= luxcarsHomeEscape($tituloNoticia) ?>">
+                            <?php if (!empty($noticia['imagem_url'])): ?>
+                                <img src="<?= luxcarsHomeEscape($noticia['imagem_url']) ?>" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                            <?php else: ?>
+                                <span class="luxcars-news-card__placeholder" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none"><path d="m3 14 1.4-4.1A2 2 0 0 1 6.3 8.5h11.4a2 2 0 0 1 1.9 1.4L21 14v4h-2v-2H5v2H3v-4Z"/><path d="M4 13h16M7 16h.01M17 16h.01"/></svg>
+                                </span>
+                            <?php endif; ?>
+                        </a>
+                        <div class="luxcars-news-card__content">
+                            <div class="luxcars-news-card__meta">
+                                <span><?= luxcarsHomeEscape($noticia['fonte'] ?: 'Fonte internacional') ?></span>
+                                <?php if ($dataIsoNoticia !== ''): ?>
+                                    <time datetime="<?= luxcarsHomeEscape($dataIsoNoticia) ?>"><?= luxcarsHomeEscape($dataFormatadaNoticia) ?></time>
+                                <?php else: ?>
+                                    <span><?= luxcarsHomeEscape($dataFormatadaNoticia) ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <h3><a href="<?= luxcarsHomeEscape($noticia['url_original']) ?>" target="_blank" rel="noopener noreferrer"><?= luxcarsHomeEscape($tituloNoticia) ?></a></h3>
+                            <?php if (!empty($noticia['descricao'])): ?>
+                                <p class="luxcars-news-card__description"><?= luxcarsHomeEscape($noticia['descricao']) ?></p>
+                            <?php endif; ?>
+                            <a class="luxcars-news-card__read" href="<?= luxcarsHomeEscape($noticia['url_original']) ?>" target="_blank" rel="noopener noreferrer">Ler not&iacute;cia <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+        <p class="luxcars-news-section__credit">Conte&uacute;do via <a href="https://apitube.io/" target="_blank" rel="noopener noreferrer">APITube</a>. As mat&eacute;rias abrem no site da fonte.</p>
+    </section>
 </main>
 <?php require dirname(__DIR__, 3) . '/includes/footer.php'; ?>
 </body>

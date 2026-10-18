@@ -21,6 +21,9 @@ function luxcarsEscape(mixed $value): string
 <main class="mx-auto max-w-7xl p-8">
     <h1 class="mb-8 text-center text-4xl">Catálogo de veículos</h1>
     <form method="get" class="mb-8 grid grid-cols-1 gap-4 rounded-xl bg-gray-800 p-5 sm:grid-cols-2 lg:grid-cols-4">
+        <label class="grid gap-1 sm:col-span-2 lg:col-span-4">Busca por palavra-chave
+            <input class="rounded p-2 text-black" type="search" name="termo" value="<?= luxcarsEscape($filtros['termo']) ?>" placeholder="Marca, modelo, cor ou ano">
+        </label>
         <label class="grid gap-1">Marca
             <input class="rounded p-2 text-black" type="search" name="marca" value="<?= luxcarsEscape($filtros['marca']) ?>" placeholder="Ex.: BMW">
         </label>

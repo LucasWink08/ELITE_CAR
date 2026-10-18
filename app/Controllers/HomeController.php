@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace LuxCars\Controllers;
 
 use LuxCars\Models\Carro;
+use LuxCars\Models\NoticiaAutomotivaRepository;
+use LuxCars\Services\NoticiasAutomotivasApi;
 use Throwable;
 
 final class HomeController
@@ -18,6 +20,26 @@ final class HomeController
         } catch (Throwable $exception) {
             error_log($exception->getMessage());
             $erroBanco = 'Não foi possível carregar os veículos. Confira a configuração do banco de dados.';
+        }
+
+        $noticias = [];
+        try {
+            $repositorioNoticias = new NoticiaAutomotivaRepository();
+            $apiKey = trim((string) (getenv('APITUBE_API_KEY') ?: ''));
+            if ($apiKey !== '' && $repositorioNoticias->precisaAtualizar()) {
+                $repositorioNoticias->marcarTentativa();
+                try {
+                    $artigos = (new NoticiasAutomotivasApi())->buscar();
+                    if ($artigos !== []) {
+                        $repositorioNoticias->salvarArtigos($artigos);
+                    }
+                } catch (Throwable $exception) {
+                    error_log('Falha ao sincronizar noticias APITube: ' . $exception->getMessage());
+                }
+            }
+            $noticias = $repositorioNoticias->listarRecentes(10);
+        } catch (Throwable $exception) {
+            error_log('Falha ao carregar noticias automotivas: ' . $exception->getMessage());
         }
 
         require dirname(__DIR__) . '/Views/home/index.php';

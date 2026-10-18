@@ -34,6 +34,12 @@ Para atualizar um banco que já foi criado com o schema anterior, execute uma ve
 
 O catálogo permite buscar por marca e modelo e filtrar por ano, faixa de preço, combustível e câmbio. Os detalhes de cada veículo incluem versão, quilometragem, cor, combustível, câmbio, descrição e informações adicionais, todos carregados da tabela `carros`.
 
+## Noticias automotivas
+
+A home consulta a APITube News API e exibe noticias automotivas em portugues. Os artigos sao atualizados no maximo a cada 15 minutos e salvos na tabela `noticias_automotivas`, incluindo os campos exibidos e o JSON retornado pela API. Em bancos existentes, execute `database/migrations/20261018_noticias_automotivas.sql`; instalacoes novas recebem a tabela pelo `database/schema.sql`.
+
+A chave APITube fica em `.env.local` (arquivo ignorado pelo Git), na variavel `APITUBE_API_KEY`. O `bootstrap.php` carrega essa configuracao local sem sobrescrever uma variavel de ambiente ja definida no servidor.
+
 ## Classes do dominio
 
 - `LuxCars\Entities\Carro`: entidade de veiculo, com propriedades privadas, getters e alteracoes validadas de preco e status.

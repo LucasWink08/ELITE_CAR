@@ -15,6 +15,7 @@ final class CarroController
         $carros = [];
         $erroBanco = null;
         $filtros = [
+            'termo' => trim((string) ($_GET['termo'] ?? '')),
             'marca' => trim((string) ($_GET['marca'] ?? '')),
             'modelo' => trim((string) ($_GET['modelo'] ?? '')),
             'ano' => trim((string) ($_GET['ano'] ?? '')),

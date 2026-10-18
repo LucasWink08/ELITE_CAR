@@ -42,6 +42,26 @@ final class Carro
         $where = ['status = :status'];
         $parametros = ['status' => 'disponivel'];
 
+        $termo = trim((string) ($filtros['termo'] ?? ''));
+        if ($termo !== '') {
+            $palavras = preg_split('/[\\s,;]+/u', $termo, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+            $palavras = array_slice($palavras, 0, 8);
+            $colunasBusca = [
+                'marca', 'modelo', 'cor', 'combustivel', 'cambio', 'versao',
+                'descricao', 'informacoes_adicionais', 'CAST(ano AS CHAR)',
+            ];
+
+            foreach ($palavras as $indice => $palavra) {
+                $condicoes = [];
+                foreach ($colunasBusca as $coluna) {
+                    $parametro = "termo_{$indice}_" . count($condicoes);
+                    $condicoes[] = "{$coluna} LIKE :{$parametro}";
+                    $parametros[$parametro] = '%' . $palavra . '%';
+                }
+                $where[] = '(' . implode(' OR ', $condicoes) . ')';
+            }
+        }
+
         foreach (['marca', 'modelo'] as $campo) {
             $termo = trim((string) ($filtros[$campo] ?? ''));
             if ($termo !== '') {
