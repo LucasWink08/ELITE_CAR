@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/bootstrap.php';
-\LuxCars\Core\Autenticacao::exigirLogin();
+\Elite\Core\Autenticacao::exigirLogin();
 ?>
 <body style="background-image: url(../assets/imagens/cars/ferrari/fenuncio.jpg);" class="bg-cover bg-center h-screen w-screen">
 

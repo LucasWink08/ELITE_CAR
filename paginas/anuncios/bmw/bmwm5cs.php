@@ -40,13 +40,13 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/thumbnail_2022-BMW-M5-CS-118.jpg" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/BMW%20M5%20CS%20front%20slide.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/BMW M5 CS front slide.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/BMW%20M5%20CS%20front%20slide.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/ALP_0536.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm5cs/BMW%20M5%20CS%20front%20slide.webp" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

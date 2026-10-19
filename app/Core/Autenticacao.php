@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Core;
+namespace Elite\Core;
 
 final class Autenticacao
 {
@@ -26,7 +26,7 @@ final class Autenticacao
         self::exigirLogin();
 
         try {
-            $administrador = (new \LuxCars\Models\UsuarioRepository())
+            $administrador = (new \Elite\Models\UsuarioRepository())
                 ->ehAdministrador((int) $_SESSION['usuario_id']);
         } catch (\Throwable $exception) {
             error_log($exception->getMessage());

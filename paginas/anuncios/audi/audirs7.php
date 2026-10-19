@@ -43,10 +43,10 @@
        <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs7/2024-audi-rs7-performance-beach-rear-2-1669663939.avif" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs7/2024-audi-rs7-performance-beach-front-2-1669663938.avif" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs7/2024-audi-rs7-performance-beach-rear-2-1669663939.avif" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs7/2024-audi-rs7-performance-front-interior-1669663935.avif " alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs7/2024-audi-rs7-performance-beach-rear-2-1669663939.avif" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

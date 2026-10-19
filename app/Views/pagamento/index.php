@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function luxcarsPagamentoEscape(mixed $value): string
+function elitePagamentoEscape(mixed $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
@@ -11,7 +11,7 @@ function luxcarsPagamentoEscape(mixed $value): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxCars | Formas de pagamento</title>
+    <title>ELITE | Formas de pagamento</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
     <link rel="stylesheet" href="../assets/css/site.css">
@@ -22,25 +22,25 @@ function luxcarsPagamentoEscape(mixed $value): string
     <h1 class="text-center text-4xl">Formas de pagamento</h1>
 
     <?php if ($erroBanco !== null): ?>
-        <p class="rounded bg-red-900 p-4 text-center" role="alert"><?= luxcarsPagamentoEscape($erroBanco) ?></p>
+        <p class="rounded bg-red-900 p-4 text-center" role="alert"><?= elitePagamentoEscape($erroBanco) ?></p>
     <?php elseif ($carro === null): ?>
         <p class="rounded bg-gray-800 p-5 text-center">Veículo não encontrado ou indisponível.</p>
         <p class="text-center"><a class="underline" href="paginadecompra.php">Voltar ao catálogo</a></p>
     <?php else: ?>
-        <?php if ($mensagemIntencao !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= luxcarsPagamentoEscape($mensagemIntencao) ?></p><?php endif; ?>
-        <?php if ($erroIntencao !== null): ?><p class="rounded bg-red-900 p-4" role="alert"><?= luxcarsPagamentoEscape($erroIntencao) ?></p><?php endif; ?>
+        <?php if ($mensagemIntencao !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= elitePagamentoEscape($mensagemIntencao) ?></p><?php endif; ?>
+        <?php if ($erroIntencao !== null): ?><p class="rounded bg-red-900 p-4" role="alert"><?= elitePagamentoEscape($erroIntencao) ?></p><?php endif; ?>
         <?php $preco = $carro->getPreco(); ?>
-        <section class="luxcars-car-card">
+        <section class="elite-car-card">
             <?php if ($carro->getImagem() !== null && $carro->getImagem() !== ''): ?>
-                <img class="luxcars-car-card__image" src="<?= luxcarsPagamentoEscape('../' . ltrim($carro->getImagem(), '/')) ?>" alt="<?= luxcarsPagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?>" loading="lazy">
+                <img class="elite-car-card__image" src="<?= elitePagamentoEscape('../' . ltrim($carro->getImagem(), '/')) ?>" alt="<?= elitePagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?>" loading="lazy">
             <?php else: ?>
-                <div class="luxcars-car-card__placeholder">Imagem indisponível</div>
+                <div class="elite-car-card__placeholder">Imagem indisponível</div>
             <?php endif; ?>
-            <div class="luxcars-car-card__content">
-                <h2 class="luxcars-car-card__title"><?= luxcarsPagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></h2>
-                <p class="luxcars-car-card__eyebrow">Ano <?= $carro->getAno() ?></p>
-                <p class="luxcars-car-card__price">Preço integral: <span id="preco-integral">R$ <?= number_format($preco, 2, ',', '.') ?></span></p>
-                <p class="luxcars-car-card__meta">As condições e a disponibilidade devem ser confirmadas com a concessionária.</p>
+            <div class="elite-car-card__content">
+                <h2 class="elite-car-card__title"><?= elitePagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></h2>
+                <p class="elite-car-card__eyebrow">Ano <?= $carro->getAno() ?></p>
+                <p class="elite-car-card__price">Preço integral: <span id="preco-integral">R$ <?= number_format($preco, 2, ',', '.') ?></span></p>
+                <p class="elite-car-card__meta">As condições e a disponibilidade devem ser confirmadas com a concessionária.</p>
             </div>
         </section>
 
@@ -85,7 +85,7 @@ function luxcarsPagamentoEscape(mixed $value): string
             <h2 id="titulo-interesse" class="text-2xl font-semibold">Tenho interesse neste veículo</h2>
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <form method="post" action="pagamento.php?id=<?= (int) $carro->getId() ?>" class="mt-4 space-y-3">
-                    <input type="hidden" name="csrf_token" value="<?= luxcarsPagamentoEscape($csrfToken) ?>">
+                    <input type="hidden" name="csrf_token" value="<?= elitePagamentoEscape($csrfToken) ?>">
                     <input type="hidden" name="carro_id" value="<?= (int) $carro->getId() ?>">
                     <label class="grid gap-1" for="mensagem-interesse">Mensagem (opcional)
                         <textarea class="rounded border border-gray-300 p-3 text-black" id="mensagem-interesse" name="mensagem" rows="3" maxlength="1000" placeholder="Conte como prefere ser contatado ou tire uma dúvida."></textarea>

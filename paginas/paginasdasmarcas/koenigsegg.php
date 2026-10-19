@@ -40,7 +40,7 @@
 <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/agera.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg agera "odin"</h2>
@@ -58,7 +58,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/CC850.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg CC850</h2>
@@ -76,7 +76,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/ccx.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg ccx</h2>
@@ -94,7 +94,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/destaques/golden.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg jesko "golden"</h2>
@@ -112,7 +112,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/Jesko+Odin+Front.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg jesko odin </h2>
@@ -130,7 +130,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/one1.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg one 1</h2>
@@ -148,7 +148,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/ragera.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg ragera</h2>
@@ -166,7 +166,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/ageraR.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg agera R</h2>
@@ -184,7 +184,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/Koenigsegg_Jesko_Genf_2019_1Y7A5546.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg jesko</h2>
@@ -202,7 +202,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/koenigsegg/jeskoabsolut.png" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">koenigsegg jesko absolut</h2>

@@ -1,4 +1,4 @@
-USE luxcars;
+USE elite;
 
 -- Tabela para solicitações de test drive. Execute uma vez em bancos existentes.
 CREATE TABLE IF NOT EXISTS agendamentos_test_drive (

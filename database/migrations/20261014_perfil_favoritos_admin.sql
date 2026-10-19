@@ -1,17 +1,17 @@
-USE luxcars;
+USE elite;
 
-SET @luxcars_tipo_existe = (
+SET @elite_tipo_existe = (
     SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'usuarios' AND COLUMN_NAME = 'tipo'
 );
-SET @luxcars_sql = IF(
-    @luxcars_tipo_existe = 0,
+SET @elite_sql = IF(
+    @elite_tipo_existe = 0,
     'ALTER TABLE usuarios ADD COLUMN tipo ENUM(''cliente'', ''admin'') NOT NULL DEFAULT ''cliente'' AFTER senha_hash',
     'SELECT 1'
 );
-PREPARE luxcars_stmt FROM @luxcars_sql;
-EXECUTE luxcars_stmt;
-DEALLOCATE PREPARE luxcars_stmt;
+PREPARE elite_stmt FROM @elite_sql;
+EXECUTE elite_stmt;
+DEALLOCATE PREPARE elite_stmt;
 
 CREATE TABLE IF NOT EXISTS favoritos (
     usuario_id INT UNSIGNED NOT NULL,

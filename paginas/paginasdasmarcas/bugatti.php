@@ -41,7 +41,7 @@
 <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/2018-08-24-bugatti-divo-37.avif" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti divo</h2>
@@ -60,7 +60,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/veyron.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti veyron </h2>
@@ -79,7 +79,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/bugatti-chiron-super-sport-2021.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti chiron</h2>
@@ -98,7 +98,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/Bugatti-Veyron-2015 (1).jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti veyron</h2>
@@ -117,7 +117,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/Bugatti-W16_Mistral-2024-1280-f3cc71974aebcc89ec019de660555c0652.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti w16 mistral </h2>
@@ -136,7 +136,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/centodieci.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti centodieci</h2>
@@ -155,7 +155,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/chiron.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti chiron</h2>
@@ -174,7 +174,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/eb110.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti eb110</h2>
@@ -194,7 +194,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/lavoityre.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes la voituire noire">bugatti la voiture noire </h2>
@@ -212,7 +212,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/bugatti/divo2.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">bugatti divo</h2>

@@ -40,13 +40,13 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audimtmrs6evo/csm_MTM_RS6_Interior_f1067ce366.webp" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audimtmrs6evo/MTM-Audi-RS6-GT-EVO-1.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audimtmrs6evo/MTM-Audi-RS6-GT-EVO-1.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audimtmrs6evo/MTM-Audi-RS6-GT-EVO-2d.webp " alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audimtmrs6evo/MTM-Audi-RS6-GT-EVO-1.webp" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

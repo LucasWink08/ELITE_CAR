@@ -43,10 +43,10 @@
        <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3/audi-rs-3-limousine-2024.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3/abt-audi-rs3-sportback.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3/audi-rs-3-limousine-2024.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3/audi-rs-3-sportback-2024.jpg " alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3/audi-rs-3-limousine-2024.jpg" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

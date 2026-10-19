@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Core\Autenticacao;
-use LuxCars\Core\Csrf;
-use LuxCars\Entities\Carro as CarroEntity;
-use LuxCars\Models\Carro;
-use LuxCars\Models\AgendamentoTestDriveRepository;
+use Elite\Core\Autenticacao;
+use Elite\Core\Csrf;
+use Elite\Entities\Carro as CarroEntity;
+use Elite\Models\Carro;
+use Elite\Models\AgendamentoTestDriveRepository;
 use Throwable;
 
 final class AdminCarrosController

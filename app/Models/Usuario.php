@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
 final class Usuario
 {

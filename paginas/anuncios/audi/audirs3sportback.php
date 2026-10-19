@@ -40,10 +40,10 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3sportback/audi-rs3-2-5-tfsi-gasolina-sportback-quattro-stronic-wmimagem20245145140.webp" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3sportback/motor.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3sportback/RS3 Sportback 2.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3sportback/motor.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audirs3sportback/motor.webp" alt="" class="w-full h-full object-cover">

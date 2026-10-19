@@ -43,10 +43,10 @@
        <img src="../../../assets/imagens/cars/imgsanuncios/audi/audittrs/audittrsesq.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audittrs/audi-tt-rs-2.5-tfsi-quattro-coupe-gasolina-2p-stronic-wmimagem1416118975.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audittrs/audittrsesq.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audittrs/dirt.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audittrs/audittrsesq.jpg" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

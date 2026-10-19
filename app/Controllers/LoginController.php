@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Models\UsuarioRepository;
+use Elite\Models\UsuarioRepository;
 use Throwable;
 
 final class LoginController

@@ -43,10 +43,10 @@
        <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4gts/2016-BMW-M4-GTS-front-three-quarter-turn-03.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4gts/image-placeholder-title.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4gts/2016-BMW-M4-GTS-front-three-quarter-turn-03.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4gts/10_studio_bmw_m4_gts_innenraum_01.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4gts/2016-BMW-M4-GTS-front-three-quarter-turn-03.webp" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

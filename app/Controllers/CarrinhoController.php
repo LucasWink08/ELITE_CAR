@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Core\Autenticacao;
-use LuxCars\Core\Csrf;
-use LuxCars\Models\CarrinhoRepository;
+use Elite\Core\Autenticacao;
+use Elite\Core\Csrf;
+use Elite\Models\CarrinhoRepository;
 use Throwable;
 
 final class CarrinhoController

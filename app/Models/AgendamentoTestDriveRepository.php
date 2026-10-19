@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
-use LuxCars\Core\Conexao;
+use Elite\Core\Conexao;
 use PDO;
 
 final class AgendamentoTestDriveRepository
@@ -16,7 +16,7 @@ final class AgendamentoTestDriveRepository
     }
 
     /** @param array{nome:string,email:string,telefone:string,carro_id:int,usuario_id:?int,data:string,horario:string} $dados */
-    public function reservar(array $dados): void
+    public function reservar(array $dados): int
     {
         $statement = $this->database->prepare(
             'INSERT INTO agendamentos_test_drive
@@ -33,6 +33,8 @@ final class AgendamentoTestDriveRepository
             'data_agendamento' => $dados['data'],
             'horario' => $dados['horario'],
         ]);
+
+        return (int) $this->database->lastInsertId();
     }
 
     /** @return array<int, array<string, mixed>> */
@@ -46,6 +48,23 @@ final class AgendamentoTestDriveRepository
              ORDER BY a.data_agendamento DESC, a.horario DESC, a.id DESC
              LIMIT 100'
         );
+        return $statement->fetchAll();
+    }
+
+    /** @return array<int, array<string, mixed>> */
+    public function listarPorUsuario(int $usuarioId): array
+    {
+        $statement = $this->database->prepare(
+            'SELECT a.id, a.data_agendamento, a.horario, a.status, a.criado_em,
+                    c.id AS carro_id, c.marca, c.modelo, c.ano, c.imagem
+             FROM agendamentos_test_drive a
+             INNER JOIN carros c ON c.id = a.carro_id
+             WHERE a.usuario_id = :usuario_id
+             ORDER BY a.data_agendamento DESC, a.horario DESC, a.id DESC
+             LIMIT 20'
+        );
+        $statement->execute(['usuario_id' => $usuarioId]);
+
         return $statement->fetchAll();
     }
 }

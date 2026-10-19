@@ -40,13 +40,13 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwx6competition/bmw-x-series-x6-m60i-gallery-image-impressions-02_890.jpg" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwx6competition/bmw-x6-m-competition-graphite-1.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwx6competition/bmw-x6-m-competition-graphite-1.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwx6competition/BMW-.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwx6competition/bmw-x6-m-competition-graphite-1.jpg" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

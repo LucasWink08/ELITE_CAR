@@ -43,10 +43,10 @@
        <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi7m70/bmw_i7_m70_xdrive_63_07dd03a8081e061e-e1681744866379.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi7m70/bmw_i7_xdrive50_3_017203880b6307c1-e1681744850618.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi7m70/bmw_i7_m70_xdrive_63_07dd03a8081e061e-e1681744866379.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi7m70/bmw_i7_m70_xdrive_30-e1681744829739.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi7m70/bmw_i7_m70_xdrive_63_07dd03a8081e061e-e1681744866379.webp" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

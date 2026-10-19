@@ -2,4 +2,4 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/bootstrap.php';
-(new \LuxCars\Controllers\ContatoController())->index();
+(new \Elite\Controllers\ContatoController())->index();

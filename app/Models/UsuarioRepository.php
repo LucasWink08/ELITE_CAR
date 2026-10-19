@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
-use LuxCars\Core\Conexao;
+use Elite\Core\Conexao;
 use PDO;
 
 final class UsuarioRepository
@@ -84,6 +84,15 @@ final class UsuarioRepository
 
         unset($usuario['senha_hash']);
         return $usuario;
+    }
+
+    public function senhaConfere(int $id, string $senha): bool
+    {
+        $statement = $this->database->prepare('SELECT senha_hash FROM usuarios WHERE id = :id');
+        $statement->execute(['id' => $id]);
+        $hash = $statement->fetchColumn();
+
+        return is_string($hash) && password_verify($senha, $hash);
     }
 
     public function atualizar(Usuario $usuario): bool

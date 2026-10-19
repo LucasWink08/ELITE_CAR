@@ -40,7 +40,7 @@
 <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/2017-10-04-porsche-panamera-turbo-sport-turismo-10.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche panamera </h2>
@@ -59,7 +59,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/2017-porsche-718-cayman.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche cayman</h2>
@@ -78,7 +78,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/911gt1s.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche 911 gt1s</h2>
@@ -97,7 +97,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porsche-718-spyder-rs-br.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche 718 spider rs </h2>
@@ -116,7 +116,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porsche-911-gt2-rs.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche 911 gt2</h2>
@@ -135,7 +135,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porsche-cayenne-2023.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche cayenne </h2>
@@ -154,7 +154,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porsche-macan-rwd-2024.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche macan</h2>
@@ -173,7 +173,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/Porsche_918_Spyder_IAA_2013.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche 918 spider </h2>
@@ -192,7 +192,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porschegt3rs.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche gt3 rs </h2>
@@ -211,7 +211,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/porsche/porschetaycan1.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">porsche taycan</h2>

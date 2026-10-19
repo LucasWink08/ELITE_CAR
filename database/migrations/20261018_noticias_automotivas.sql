@@ -1,4 +1,4 @@
-USE luxcars;
+USE elite;
 
 CREATE TABLE IF NOT EXISTS noticias_automotivas (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

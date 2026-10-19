@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Models\Usuario;
-use LuxCars\Models\UsuarioRepository;
+use Elite\Models\Usuario;
+use Elite\Models\UsuarioRepository;
 use PDOException;
 use Throwable;
 

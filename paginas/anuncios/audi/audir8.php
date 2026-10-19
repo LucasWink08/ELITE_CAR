@@ -40,13 +40,13 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audir8/77887161268a44447d39e014ff281fec.jpg" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audir8/audi.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/audi/audir8/audi.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audir8/images.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/audi/audir8/audi.jpg" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

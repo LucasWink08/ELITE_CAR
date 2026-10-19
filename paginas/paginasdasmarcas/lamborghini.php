@@ -40,7 +40,7 @@
 <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/2024-lamborghini-revuelto-110-651719c597ac8.avif" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini revuelto </h2>
@@ -59,7 +59,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/aventador2021.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini aventador</h2>
@@ -78,7 +78,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/huracen2018.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini huracan</h2>
@@ -97,7 +97,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/lambo-revuelto-1.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini revuelto</h2>
@@ -115,7 +115,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/inovacoes-que-o-Lamborghini-Aventador.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini aventador</h2>
@@ -134,7 +134,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/lamborghini-gallardo-5795139_1280.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini gallardo</h2>
@@ -153,7 +153,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/lamborghini-urus-s.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini urus </h2>
@@ -172,7 +172,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/lamborghini-veneno-6.webp" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini veneno</h2>
@@ -191,7 +191,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/urus2024.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini urus</h2>
@@ -210,7 +210,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/lamborghini/lamborghini-huracan-sto.jpg" alt="Carro" class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
                 <h2 class="font-bold text-lg text-black gtimes">lamborghini huracan</h2>

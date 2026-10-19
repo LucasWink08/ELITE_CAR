@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Core\Csrf;
-use LuxCars\Models\MensagemContatoRepository;
+use Elite\Core\Csrf;
+use Elite\Models\MensagemContatoRepository;
 use Throwable;
 
 final class ContatoController

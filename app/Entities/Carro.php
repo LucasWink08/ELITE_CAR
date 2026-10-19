@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Entities;
+namespace Elite\Entities;
 
 final class Carro
 {

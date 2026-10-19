@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
-function luxcarsAdminEscape(mixed $value): string { return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8'); }
+function eliteAdminEscape(mixed $value): string { return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8'); }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LuxCars | Administração de veículos</title><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../assets/css/fonte.css">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ELITE | Administração de veículos</title><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../assets/css/fonte.css">
     <link rel="stylesheet" href="../assets/css/site.css"></head>
 <body class="min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
 <main class="mx-auto max-w-7xl space-y-8 p-6 sm:p-8">
     <div class="flex flex-wrap items-center justify-between gap-4"><h1 class="text-3xl font-bold sm:text-4xl">Administração de veículos</h1><a href="perfil.php" class="underline">Meu perfil</a></div>
-    <?php if ($mensagem !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= luxcarsAdminEscape($mensagem) ?></p><?php endif; ?>
-    <?php if ($erros !== []): ?><div class="rounded bg-red-900 p-4" role="alert"><ul class="list-inside list-disc"><?php foreach (array_unique($erros) as $erro): ?><li><?= luxcarsAdminEscape($erro) ?></li><?php endforeach; ?></ul></div><?php endif; ?>
+    <?php if ($mensagem !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= eliteAdminEscape($mensagem) ?></p><?php endif; ?>
+    <?php if ($erros !== []): ?><div class="rounded bg-red-900 p-4" role="alert"><ul class="list-inside list-disc"><?php foreach (array_unique($erros) as $erro): ?><li><?= eliteAdminEscape($erro) ?></li><?php endforeach; ?></ul></div><?php endif; ?>
 
     <section class="rounded-xl bg-white p-6 text-black shadow-xl">
         <h2 class="mb-5 text-2xl font-semibold"><?= $carroEdicao === null ? 'Cadastrar veículo' : 'Editar veículo' ?></h2>
         <form method="post" action="admin_carros.php<?= $carroEdicao !== null ? '?editar=' . (int) $carroEdicao->getId() : '' ?>" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <input type="hidden" name="csrf_token" value="<?= luxcarsAdminEscape($csrfToken) ?>">
+            <input type="hidden" name="csrf_token" value="<?= eliteAdminEscape($csrfToken) ?>">
             <input type="hidden" name="acao" value="salvar">
             <input type="hidden" name="id" value="<?= $carroEdicao === null ? '' : (int) $carroEdicao->getId() ?>">
             <?php foreach ([
@@ -26,7 +26,7 @@ function luxcarsAdminEscape(mixed $value): string { return htmlspecialchars((str
                 'combustivel' => ['Combustível', 'text'], 'cambio' => ['Câmbio', 'text'], 'versao' => ['Versão', 'text'],
             ] as $campo => [$rotulo, $tipo]): ?>
                 <label class="grid gap-1"><?= $rotulo ?>
-                    <input class="rounded border border-gray-300 p-3" type="<?= $tipo ?>" name="<?= $campo ?>" value="<?= luxcarsAdminEscape($dados[$campo]) ?>" <?= $campo === 'ano' ? 'min="1886" max="' . ((int) date('Y') + 1) . '"' : '' ?> <?= $campo === 'preco' ? 'min="0" step="0.01"' : '' ?> <?= $campo === 'quilometragem' ? 'min="0" step="1"' : '' ?> maxlength="<?= $campo === 'marca' ? 80 : ($campo === 'modelo' ? 120 : ($campo === 'imagem' ? 255 : 100)) ?>" <?= in_array($campo, ['marca', 'modelo', 'ano', 'preco'], true) ? 'required' : '' ?>>
+                    <input class="rounded border border-gray-300 p-3" type="<?= $tipo ?>" name="<?= $campo ?>" value="<?= eliteAdminEscape($dados[$campo]) ?>" <?= $campo === 'ano' ? 'min="1886" max="' . ((int) date('Y') + 1) . '"' : '' ?> <?= $campo === 'preco' ? 'min="0" step="0.01"' : '' ?> <?= $campo === 'quilometragem' ? 'min="0" step="1"' : '' ?> maxlength="<?= $campo === 'marca' ? 80 : ($campo === 'modelo' ? 120 : ($campo === 'imagem' ? 255 : 100)) ?>" <?= in_array($campo, ['marca', 'modelo', 'ano', 'preco'], true) ? 'required' : '' ?>>
                 </label>
             <?php endforeach; ?>
             <label class="grid gap-1">Disponibilidade
@@ -37,10 +37,10 @@ function luxcarsAdminEscape(mixed $value): string { return htmlspecialchars((str
                 </select>
             </label>
             <label class="grid gap-1 sm:col-span-2">Descrição
-                <textarea class="rounded border border-gray-300 p-3" name="descricao" rows="3"><?= luxcarsAdminEscape($dados['descricao']) ?></textarea>
+                <textarea class="rounded border border-gray-300 p-3" name="descricao" rows="3"><?= eliteAdminEscape($dados['descricao']) ?></textarea>
             </label>
             <label class="grid gap-1 sm:col-span-2 lg:col-span-3">Informações adicionais
-                <textarea class="rounded border border-gray-300 p-3" name="informacoes_adicionais" rows="3"><?= luxcarsAdminEscape($dados['informacoes_adicionais']) ?></textarea>
+                <textarea class="rounded border border-gray-300 p-3" name="informacoes_adicionais" rows="3"><?= eliteAdminEscape($dados['informacoes_adicionais']) ?></textarea>
             </label>
             <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-3">
                 <button class="rounded bg-black px-5 py-3 font-semibold text-white hover:bg-gray-800" type="submit"><?= $carroEdicao === null ? 'Cadastrar veículo' : 'Salvar alterações' ?></button>
@@ -56,10 +56,10 @@ function luxcarsAdminEscape(mixed $value): string { return htmlspecialchars((str
                 <table class="min-w-full text-left text-sm">
                     <thead class="bg-gray-100"><tr><th class="p-3">Veículo</th><th class="p-3">Ano</th><th class="p-3">Preço</th><th class="p-3">Disponibilidade</th><th class="p-3">Ações</th></tr></thead>
                     <tbody><?php foreach ($carros as $carro): ?>
-                        <tr class="border-t"><td class="p-3 font-semibold"><?= luxcarsAdminEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></td><td class="p-3"><?= $carro->getAno() ?></td><td class="p-3">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></td><td class="p-3"><?= luxcarsAdminEscape($carro->getStatus()) ?></td>
+                        <tr class="border-t"><td class="p-3 font-semibold"><?= eliteAdminEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></td><td class="p-3"><?= $carro->getAno() ?></td><td class="p-3">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></td><td class="p-3"><?= eliteAdminEscape($carro->getStatus()) ?></td>
                         <td class="flex flex-wrap gap-3 p-3"><a class="text-blue-800 underline" href="admin_carros.php?editar=<?= (int) $carro->getId() ?>">Editar</a>
                             <form method="post" action="admin_carros.php" onsubmit="return confirm('Excluir este veículo? Os registros relacionados também serão removidos.')">
-                                <input type="hidden" name="csrf_token" value="<?= luxcarsAdminEscape($csrfToken) ?>"><input type="hidden" name="acao" value="excluir"><input type="hidden" name="id" value="<?= (int) $carro->getId() ?>">
+                                <input type="hidden" name="csrf_token" value="<?= eliteAdminEscape($csrfToken) ?>"><input type="hidden" name="acao" value="excluir"><input type="hidden" name="id" value="<?= (int) $carro->getId() ?>">
                                 <button class="text-red-700 underline" type="submit">Excluir</button>
                             </form>
                         </td></tr>
@@ -76,11 +76,11 @@ function luxcarsAdminEscape(mixed $value): string { return htmlspecialchars((str
                     <thead class="bg-gray-100"><tr><th class="p-3">Cliente</th><th class="p-3">Contato</th><th class="p-3">Ve&iacute;culo</th><th class="p-3">Data e hor&aacute;rio</th><th class="p-3">Status</th></tr></thead>
                     <tbody><?php foreach ($agendamentosTestDrive as $agendamento): ?>
                         <tr class="border-t">
-                            <td class="p-3 font-semibold"><?= luxcarsAdminEscape($agendamento['nome']) ?></td>
-                            <td class="p-3"><a class="underline" href="mailto:<?= luxcarsAdminEscape($agendamento['email']) ?>"><?= luxcarsAdminEscape($agendamento['email']) ?></a><br><?= luxcarsAdminEscape($agendamento['telefone']) ?></td>
-                            <td class="p-3"><?= luxcarsAdminEscape($agendamento['marca'] . ' ' . $agendamento['modelo']) ?></td>
-                            <td class="p-3"><?= luxcarsAdminEscape(date('d/m/Y', strtotime($agendamento['data_agendamento']))) ?> &agrave;s <?= luxcarsAdminEscape(substr((string) $agendamento['horario'], 0, 5)) ?></td>
-                            <td class="p-3"><?= luxcarsAdminEscape($agendamento['status']) ?></td>
+                            <td class="p-3 font-semibold"><?= eliteAdminEscape($agendamento['nome']) ?></td>
+                            <td class="p-3"><a class="underline" href="mailto:<?= eliteAdminEscape($agendamento['email']) ?>"><?= eliteAdminEscape($agendamento['email']) ?></a><br><?= eliteAdminEscape($agendamento['telefone']) ?></td>
+                            <td class="p-3"><?= eliteAdminEscape($agendamento['marca'] . ' ' . $agendamento['modelo']) ?></td>
+                            <td class="p-3"><?= eliteAdminEscape(date('d/m/Y', strtotime($agendamento['data_agendamento']))) ?> &agrave;s <?= eliteAdminEscape(substr((string) $agendamento['horario'], 0, 5)) ?></td>
+                            <td class="p-3"><?= eliteAdminEscape($agendamento['status']) ?></td>
                         </tr>
                     <?php endforeach; ?></tbody>
                 </table>

@@ -1,4 +1,4 @@
-USE luxcars;
+USE elite;
 
 CREATE TABLE IF NOT EXISTS mensagens_contato (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

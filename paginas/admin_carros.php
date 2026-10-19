@@ -1,4 +1,4 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/bootstrap.php';
-(new \LuxCars\Controllers\AdminCarrosController())->index();
+(new \Elite\Controllers\AdminCarrosController())->index();

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Models\Carro;
-use LuxCars\Models\NoticiaAutomotivaRepository;
-use LuxCars\Services\NoticiasAutomotivasApi;
+use Elite\Models\Carro;
+use Elite\Models\NoticiaAutomotivaRepository;
+use Elite\Services\NoticiasAutomotivasApi;
 use Throwable;
 
 final class HomeController
@@ -27,12 +27,12 @@ final class HomeController
             $repositorioNoticias = new NoticiaAutomotivaRepository();
             $apiKey = trim((string) (getenv('APITUBE_API_KEY') ?: ''));
             if ($apiKey !== '' && $repositorioNoticias->precisaAtualizar()) {
-                $repositorioNoticias->marcarTentativa();
                 try {
                     $artigos = (new NoticiasAutomotivasApi())->buscar();
                     if ($artigos !== []) {
                         $repositorioNoticias->salvarArtigos($artigos);
                     }
+                    $repositorioNoticias->marcarTentativa();
                 } catch (Throwable $exception) {
                     error_log('Falha ao sincronizar noticias APITube: ' . $exception->getMessage());
                 }

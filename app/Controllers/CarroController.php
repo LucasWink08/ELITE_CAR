@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
-use LuxCars\Models\Carro;
-use LuxCars\Models\InteracaoRepository;
-use LuxCars\Core\Csrf;
+use Elite\Models\Carro;
+use Elite\Models\InteracaoRepository;
+use Elite\Core\Csrf;
 use Throwable;
 
 final class CarroController

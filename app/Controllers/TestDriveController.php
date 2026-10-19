@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Controllers;
+namespace Elite\Controllers;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use LuxCars\Core\Csrf;
-use LuxCars\Models\AgendamentoTestDriveRepository;
-use LuxCars\Models\Carro;
+use Elite\Core\Csrf;
+use Elite\Models\AgendamentoTestDriveRepository;
+use Elite\Models\Carro;
 use PDOException;
 use Throwable;
 
@@ -39,10 +39,8 @@ final class TestDriveController
 
             if (!Csrf::validar($_POST['csrf_token'] ?? null)) {
                 $erros[] = 'O formul&aacute;rio expirou. Atualize a p&aacute;gina e tente novamente.';
-            } elseif (!empty($_POST['website'])) {
-                $_SESSION['test_drive_sucesso'] = 'Solicita&ccedil;&atilde;o recebida. Nossa equipe entrar&aacute; em contato para confirmar o test drive.';
-                header('Location: seguroveic.php');
-                exit;
+            } elseif (!empty($_POST['site_check_7f2a'])) {
+                $erros[] = 'NÃ£o foi possÃ­vel validar o envio. Atualize a pÃ¡gina e tente novamente.';
             } else {
                 if ($this->comprimento($dados['nome']) < 2 || $this->comprimento($dados['nome']) > 150) {
                     $erros[] = 'Informe seu nome (de 2 a 150 caracteres).';
@@ -78,16 +76,24 @@ final class TestDriveController
 
                 if ($erros === [] && $carroSelecionado !== null && $carroId !== false && $dataValida) {
                     try {
-                        (new AgendamentoTestDriveRepository())->reservar([
+                        $usuarioId = isset($_SESSION['usuario_id']) && is_numeric($_SESSION['usuario_id'])
+                            ? (int) $_SESSION['usuario_id']
+                            : null;
+                        $idAgendamento = (new AgendamentoTestDriveRepository())->reservar([
                             'nome' => $dados['nome'],
                             'email' => $dados['email'],
                             'telefone' => $telefone,
                             'carro_id' => $carroId,
-                            'usuario_id' => isset($_SESSION['usuario_id']) && is_numeric($_SESSION['usuario_id']) ? (int) $_SESSION['usuario_id'] : null,
+                            'usuario_id' => $usuarioId,
                             'data' => $dados['data'],
                             'horario' => $dados['horario'] . ':00',
                         ]);
-                        $_SESSION['test_drive_sucesso'] = 'Solicita&ccedil;&atilde;o recebida. Nossa equipe entrar&aacute; em contato para confirmar o test drive.';
+                        if ($idAgendamento < 1) {
+                            throw new \RuntimeException('O MySQL nao retornou o identificador do agendamento salvo.');
+                        }
+                        $_SESSION['test_drive_sucesso'] = $usuarioId !== null
+                            ? 'Solicita&ccedil;&atilde;o #' . $idAgendamento . ' registrada e vinculada ao seu perfil. Nossa equipe entrar&aacute; em contato para confirmar o test drive.'
+                            : 'Solicita&ccedil;&atilde;o #' . $idAgendamento . ' registrada. Entre na sua conta antes de agendar para acompanhar o pedido no perfil.';
                         header('Location: seguroveic.php');
                         exit;
                     } catch (PDOException $exception) {
@@ -111,8 +117,8 @@ final class TestDriveController
         require dirname(__DIR__) . '/Views/test_drive/index.php';
     }
 
-    /** @param array<int, \LuxCars\Entities\Carro> $carros */
-    private function carroDisponivel(array $carros, int $id): ?\LuxCars\Entities\Carro
+    /** @param array<int, \Elite\Entities\Carro> $carros */
+    private function carroDisponivel(array $carros, int $id): ?\Elite\Entities\Carro
     {
         foreach ($carros as $carro) {
             if ($carro->getId() === $id) {

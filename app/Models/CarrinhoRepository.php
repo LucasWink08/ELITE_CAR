@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
-use LuxCars\Core\Conexao;
+use Elite\Core\Conexao;
 use PDO;
 
 final class CarrinhoRepository

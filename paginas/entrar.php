@@ -2,4 +2,4 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/bootstrap.php';
-(new \LuxCars\Controllers\LoginController())->index();
+(new \Elite\Controllers\LoginController())->index();

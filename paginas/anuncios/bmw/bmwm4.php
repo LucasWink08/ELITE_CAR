@@ -40,10 +40,10 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2 ">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4/AI_1_F8_highRes_the-new-bmw-m4-compe.avif" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4/BMW-M4-CS-6.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4/bmw-m4-front-view.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4/BMW-M4-CS-6.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm4/BMW-M4-CS-6.webp" alt="" class="w-full h-full object-cover">

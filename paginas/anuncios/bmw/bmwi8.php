@@ -39,13 +39,13 @@
 <body class="bg-gradient-to-t from-black to-gray-700 text-white min-h-screen">
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?><div class="justify between w-screen flex h-[500px] gap-x-2 ">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi8/images (1).jpeg" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi8/bmw-i8-roadster-im-test.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi8/bmw-i8-roadster-im-test.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi8/2016-02-12-bmw-i8-protonic-red-edition.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwi8/bmw-i8-roadster-im-test.jpg" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 

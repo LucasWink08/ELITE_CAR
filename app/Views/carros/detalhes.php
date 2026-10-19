@@ -1,25 +1,50 @@
 <?php
 declare(strict_types=1);
 
-function luxcarsDetalhesEscape(mixed $value): string
+function eliteDetalhesEscape(mixed $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
 
-function luxcarsDetalhesSlug(string $value): string
+function eliteDetalhesSlug(string $value): string
 {
     $ascii = function_exists('iconv') ? iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value) : $value;
     return strtolower((string) preg_replace('/[^a-z0-9]+/i', '', $ascii === false ? $value : $ascii));
 }
 
-function luxcarsDetalhesGoogleImages(string $marca, string $modelo, int $ano, string $termo): string
+/** Fotos diretas encontradas no Google Imagens, usadas somente quando a pasta local não tem aquele tipo de foto. */
+function eliteDetalhesFotosComplementares(string $marcaSlug, string $modeloSlug): array
 {
-    $consulta = trim($marca . ' ' . $modelo . ' ' . $ano . ' ' . $termo);
-    return 'https://www.google.com/search?tbm=isch&q=' . rawurlencode($consulta);
-}
+    $fotos = [
+        'bmw:m5cs' => [['src' => 'https://hips.hearstapps.com/hmg-prod/images/2022-bmw-m5-cs-164-1611684148.jpg?crop=1xw%3A0.9167590632664718xh%3Bcenter%2Ctop&resize=980%3A%2A', 'legenda' => 'Interior']],
+        'bmw:x6competition' => [['src' => 'https://mediapool.bmwgroup.com/download/edown/pressclub/publicq?actEvent=image&attachment=1&dokNo=P90495591', 'legenda' => 'Interior']],
+        'bmw:m5' => [['src' => 'https://hips.hearstapps.com/hmg-prod/images/2021-bmw-m5-110-1591638968.jpg', 'legenda' => 'Interior']],
+        'bmw:i8' => [['src' => 'https://www.autocar.co.uk/sites/default/files/styles/gallery_slide/public/bmw-i8-uk-road-test-2014-015.jpg', 'legenda' => 'Interior']],
+        'bmw:i7m70' => [['src' => 'https://images.carexpert.com.au/resize/3000/-/app/uploads/2023/09/2024_BMW_i7_M70_xDrive_Two_Tone_Liquid_Copper-Sapphire_Black-059.jpg', 'legenda' => 'Interior']],
+        'bmw:x4m40i' => [['src' => 'https://images.dealersync.com/3051/Photos/1328786/20250627233700341_IMG_3455.png', 'legenda' => 'Interior']],
+        'bmw:m4' => [['src' => 'https://garasikami.com/Mobil/BMW/BMW%208/BMW%20M4%20Competition%20G82%20Idrive%208%202023/S__14032921_0.jpg', 'legenda' => 'Interior']],
+        'bmw:m8grancoupe' => [['src' => 'https://mediapool.bmwgroup.com/cache/P9/202206/P90466605/P90466605-the-bmw-m8-competition-gran-coupe-06-2022-2249px.jpg', 'legenda' => 'Interior']],
+        'porsche:718spiderrs' => [['src' => 'https://images-porsche.imgix.net/-/media/BE2D7B0BAB834CFB91A7693BBBF7BD4B_4F3846E68BF54327B43B2E65B1DF8D0B_718-spyder-rs-cockpit-desktop?auto=format&q=85&w=1299', 'legenda' => 'Interior']],
+        'porsche:911gt1s' => [['src' => 'https://content-hub.imgix.net/7tYX6SsY07yeMeHI2sxsyx/4945dac9bce09c703033c91262de7a8c/911_gt1_strassenversion_4.jpg?w=1308', 'legenda' => 'Interior']],
+        'porsche:taycan' => [['src' => 'https://greencarscompare.com/upload/resize_cache/iblock/33d/1100_618_2/dkpqn2sbjopxqssu2frzl0l239edmme9.jpg', 'legenda' => 'Interior']],
+        'porsche:gt3rs' => [['src' => 'https://hips.hearstapps.com/mtg-prod/65cd8566bb63b500089200a3/2019-porsche-911-gt3-rs-weissach-package-front-interior-02.jpg?format=webp&q=100&resize=1920%3A%2A&w=768', 'legenda' => 'Interior']],
+        'porsche:cayenne' => [['src' => 'https://ymimg1.b8cdn.com/uploads/car_version/21701/pictures/6197511/14196_st1280_163.jpg', 'legenda' => 'Interior']],
+        'porsche:macan' => [['src' => 'https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/7648106b-9867-4ec0-ba15-0ac4d897b2db/78c8705d-ac30-44d3-84b0-21f5e7b7f5cd.png', 'legenda' => 'Interior']],
+        'porsche:panamera' => [['src' => 'https://s1.cdn.autoevolution.com/images/gallery/PORSCHE-Panamera--971--6934_1.jpg', 'legenda' => 'Interior']],
+        'porsche:cayman' => [['src' => 'https://images.dealersync.com/3/Photos/1193851/20240928042705855_IMG_2706.jpg?_=182e1ce422969af8b3765c6e4beeb00cf27779e0', 'legenda' => 'Interior']],
+        'porsche:918spider' => [['src' => 'https://car-images.bauersecure.com/wp-images/13775/00091a00cf5f-532f-475c-a.jpg', 'legenda' => 'Interior']],
+        'porsche:911gt2' => [['src' => 'https://duttongarage.com/image/GXiCBux0k83WN84AGsABAA/2002-Porsche-911-996-GT2-Coupe-2dr-Man-6sp-3-6TT-MY03-19.webp', 'legenda' => 'Interior']],
+        'audi:r8' => [['src' => 'https://static.cargurus.com/images/site/2017/08/26/19/10/2018_audi_r8_5_2_quattro__v10_-pic-8948038221470639801-1600x1200.jpeg', 'legenda' => 'Interior']],
+        'audi:rs6avant' => [['src' => 'https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/947d41eb-9271-4b2b-98a0-6df47b768bb1/07ae6c84-f20e-4e1b-a7a4-37f35b1e57a3.png', 'legenda' => 'Interior']],
+        'audi:ttrs' => [['src' => 'https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/96-audi-tt-rs-2019-facelift-press-cabin.jpg', 'legenda' => 'Interior']],
+        'audi:rs3' => [['src' => 'https://cdn.motor1.com/images/mgl/33lK1/s1/audi-rs-3-sportback-2021-im-test.jpg', 'legenda' => 'Interior']],
+        'audi:rs4avant' => [['src' => 'https://images.carexpert.com.au/resize/3000/-/app/uploads/2020/10/Audi-RS4-Avant-24.jpeg', 'legenda' => 'Interior']],
+    ];
 
+    return $fotos[$marcaSlug . ':' . $modeloSlug] ?? [];
+}
 /** @return array<int, array{tipo:string,src?:string,href?:string,alt:string,legenda:string,origem?:string}> */
-function luxcarsDetalhesGaleria(\LuxCars\Entities\Carro $carro): array
+function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
 {
     $galeria = [];
     $marca = $carro->getMarca();
@@ -43,14 +68,14 @@ function luxcarsDetalhesGaleria(\LuxCars\Entities\Carro $carro): array
     }
 
     $raizGalerias = dirname(__DIR__, 3) . '/assets/imagens/cars/imgsanuncios';
-    $marcaSlug = luxcarsDetalhesSlug($marca);
-    $modeloSlug = luxcarsDetalhesSlug($modelo);
+    $marcaSlug = eliteDetalhesSlug($marca);
+    $modeloSlug = eliteDetalhesSlug($modelo);
     $marcaDir = null;
 
     if (is_dir($raizGalerias)) {
         foreach (scandir($raizGalerias) ?: [] as $nomeDir) {
             $caminho = $raizGalerias . DIRECTORY_SEPARATOR . $nomeDir;
-            if (is_dir($caminho) && $nomeDir !== '.' && $nomeDir !== '..' && luxcarsDetalhesSlug($nomeDir) === $marcaSlug) {
+            if (is_dir($caminho) && $nomeDir !== '.' && $nomeDir !== '..' && eliteDetalhesSlug($nomeDir) === $marcaSlug) {
                 $marcaDir = $caminho;
                 break;
             }
@@ -65,7 +90,7 @@ function luxcarsDetalhesGaleria(\LuxCars\Entities\Carro $carro): array
             if (!is_dir($caminho) || $nomeDir === '.' || $nomeDir === '..') {
                 continue;
             }
-            $slugPasta = luxcarsDetalhesSlug($nomeDir);
+            $slugPasta = eliteDetalhesSlug($nomeDir);
             if (!str_starts_with($slugPasta, $marcaSlug)) {
                 continue;
             }
@@ -143,123 +168,110 @@ function luxcarsDetalhesGaleria(\LuxCars\Entities\Carro $carro): array
         $galeria[] = $motor;
     }
 
-    if ($interiores === [] && !$principalEhInterior && $marcaSlug === 'bmw' && str_contains($modeloSlug, 'x6')) {
-        $galeria[] = [
-            'tipo' => 'imagem',
-            'src' => 'https://mediapool.bmwgroup.com/download/edown/pressclub/publicq?actEvent=image&attachment=1&dokNo=P90495591',
-            'alt' => 'Interior do BMW X6 M Competition',
-            'legenda' => 'Interior · BMW PressClub',
-            'origem' => 'https://www.press.bmwgroup.com/latin-america-caribbean/photo/detail/P90495591/The-new-BMW-X6-M-Competition-Interior-02-2023',
-        ];
-    } elseif ($interiores === [] && !$principalEhInterior) {
-        $galeria[] = [
-            'tipo' => 'busca',
-            'href' => luxcarsDetalhesGoogleImages($marca, $modelo, $ano, 'interior'),
-            'alt' => 'Buscar fotos do interior de ' . $nome,
-            'legenda' => 'Buscar interior no Google',
-        ];
+    if ($interiores === [] && !$principalEhInterior) {
+        foreach (eliteDetalhesFotosComplementares($marcaSlug, $modeloSlug) as $complemento) {
+            $srcComplementar = (string) ($complemento['src'] ?? '');
+            if (preg_match('#^https://#i', $srcComplementar) !== 1 || isset($caminhosAdicionados[strtolower($srcComplementar)])) {
+                continue;
+            }
+            $galeria[] = [
+                'tipo' => 'imagem',
+                'src' => $srcComplementar,
+                'alt' => 'Foto do ' . $nome . ' encontrada no Google Imagens',
+                'legenda' => (string) ($complemento['legenda'] ?? 'Foto complementar') . ' · foto complementar',
+            ];
+            $caminhosAdicionados[strtolower($srcComplementar)] = true;
+        }
     }
-
-    $termosAdicionais = ['fotos externas', 'motor'];
-    $indiceTermo = 0;
-    while (count($galeria) < 3) {
-        $galeria[] = [
-            'tipo' => 'busca',
-            'href' => luxcarsDetalhesGoogleImages($marca, $modelo, $ano, $termosAdicionais[$indiceTermo] ?? 'fotos'),
-            'alt' => 'Buscar mais fotos de ' . $nome,
-            'legenda' => ($termosAdicionais[$indiceTermo] ?? 'fotos') === 'motor' ? 'Buscar fotos do motor' : 'Ver mais fotos no Google',
-        ];
-        $indiceTermo++;
-    }
-
     return array_slice($galeria, 0, 12);
 }
 
 $nomeVeiculo = $carro === null ? '' : trim($carro->getMarca() . ' ' . $carro->getModelo());
-$galeriaVeiculo = $carro === null ? [] : luxcarsDetalhesGaleria($carro);
+$galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= luxcarsDetalhesEscape($carro === null ? 'Detalhes dos veículos LuxCars.' : 'Confira fotos, informações e condições do ' . $nomeVeiculo . '.') ?>">
-    <title><?= luxcarsDetalhesEscape($carro === null ? 'LuxCars | Veículo' : 'LuxCars | ' . $nomeVeiculo) ?></title>
+    <meta name="description" content="<?= eliteDetalhesEscape($carro === null ? 'Detalhes dos veículos ELITE.' : 'Confira fotos, informações e condições do ' . $nomeVeiculo . '.') ?>">
+    <title><?= eliteDetalhesEscape($carro === null ? 'ELITE | Veículo' : 'ELITE | ' . $nomeVeiculo) ?></title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
     <link rel="stylesheet" href="../assets/css/site.css">
 </head>
-<body class="luxcars-vehicle-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
+<body class="elite-vehicle-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
-<main class="luxcars-vehicle-detail">
+<main class="elite-vehicle-detail">
     <?php if ($erroBanco !== null): ?>
-        <p class="luxcars-vehicle-detail__notice" role="alert"><?= luxcarsDetalhesEscape($erroBanco) ?></p>
+        <p class="elite-vehicle-detail__notice" role="alert"><?= eliteDetalhesEscape($erroBanco) ?></p>
     <?php elseif ($carro === null): ?>
-        <p class="luxcars-vehicle-detail__notice" role="status">Veículo não encontrado ou indisponível.</p>
+        <p class="elite-vehicle-detail__notice" role="status">Veículo não encontrado ou indisponível.</p>
     <?php else: ?>
-        <section class="luxcars-vehicle-gallery" aria-label="Galeria de fotos do <?= luxcarsDetalhesEscape($nomeVeiculo) ?>" data-vehicle-gallery>
-            <div class="luxcars-vehicle-gallery__viewport" id="galeria-veiculo-<?= (int) $carro->getId() ?>">
-                <div class="luxcars-vehicle-gallery__track">
+        <section class="elite-vehicle-gallery" aria-label="Galeria de fotos do <?= eliteDetalhesEscape($nomeVeiculo) ?>" data-vehicle-gallery>
+            <div class="elite-vehicle-gallery__viewport" id="galeria-veiculo-<?= (int) $carro->getId() ?>">
+                <div class="elite-vehicle-gallery__track">
                     <?php foreach ($galeriaVeiculo as $indiceFoto => $foto): ?>
                         <?php if ($foto['tipo'] === 'imagem'): ?>
-                            <figure class="luxcars-vehicle-gallery__item" data-fallback-url="<?= luxcarsDetalhesEscape(luxcarsDetalhesGoogleImages($carro->getMarca(), $carro->getModelo(), $carro->getAno(), 'fotos')) ?>" data-fallback-title="<?= luxcarsDetalhesEscape($nomeVeiculo . ' ' . $carro->getAno()) ?>">
-                                <?php if (!empty($foto['origem'])): ?><a href="<?= luxcarsDetalhesEscape($foto['origem']) ?>" target="_blank" rel="noopener noreferrer" aria-label="Abrir fonte da foto do interior"><?php endif; ?>
-                                <img src="<?= luxcarsDetalhesEscape($foto['src']) ?>" alt="<?= luxcarsDetalhesEscape($foto['alt']) ?>"<?= $indiceFoto === 0 ? '' : ' loading="lazy"' ?>>
+                            <?php $fotosFallback = eliteDetalhesFotosComplementares(eliteDetalhesSlug($carro->getMarca()), eliteDetalhesSlug($carro->getModelo())); ?>
+                            <figure class="elite-vehicle-gallery__item" data-fallback-src="<?= eliteDetalhesEscape((string) ($fotosFallback[0]['src'] ?? '')) ?>">
+                                <?php if (!empty($foto['origem'])): ?><a href="<?= eliteDetalhesEscape($foto['origem']) ?>" target="_blank" rel="noopener noreferrer" aria-label="Abrir fonte da foto do interior"><?php endif; ?>
+                                <img src="<?= eliteDetalhesEscape($foto['src']) ?>" alt="<?= eliteDetalhesEscape($foto['alt']) ?>"<?= $indiceFoto === 0 ? '' : ' loading="lazy"' ?>>
                                 <?php if (!empty($foto['origem'])): ?></a><?php endif; ?>
-                                <figcaption><?= luxcarsDetalhesEscape($foto['legenda']) ?></figcaption>
+                                <figcaption><?= eliteDetalhesEscape($foto['legenda']) ?></figcaption>
                             </figure>
                         <?php else: ?>
-                            <a class="luxcars-vehicle-gallery__item luxcars-vehicle-gallery__search" href="<?= luxcarsDetalhesEscape($foto['href']) ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= luxcarsDetalhesEscape($foto['alt']) ?>">
-                                <span class="luxcars-vehicle-gallery__search-icon" aria-hidden="true">↗</span>
-                                <span><?= luxcarsDetalhesEscape($foto['legenda']) ?></span>
-                                <small><?= luxcarsDetalhesEscape($nomeVeiculo . ' · ' . $carro->getAno()) ?></small>
+                            <a class="elite-vehicle-gallery__item elite-vehicle-gallery__search" href="<?= eliteDetalhesEscape($foto['href']) ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= eliteDetalhesEscape($foto['alt']) ?>">
+                                <span class="elite-vehicle-gallery__search-icon" aria-hidden="true">↗</span>
+                                <span><?= eliteDetalhesEscape($foto['legenda']) ?></span>
+                                <small><?= eliteDetalhesEscape($nomeVeiculo . ' · ' . $carro->getAno()) ?></small>
                             </a>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>
-            <button class="luxcars-vehicle-gallery__arrow luxcars-vehicle-gallery__arrow--previous" type="button" data-gallery-previous aria-label="Foto anterior" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8592;</button>
-            <button class="luxcars-vehicle-gallery__arrow luxcars-vehicle-gallery__arrow--next" type="button" data-gallery-next aria-label="Próxima foto" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8594;</button>
-            <p class="luxcars-vehicle-gallery__count" aria-live="polite"><span data-gallery-current>01</span> / <?= str_pad((string) count($galeriaVeiculo), 2, '0', STR_PAD_LEFT) ?></p>
+            <button class="elite-vehicle-gallery__arrow elite-vehicle-gallery__arrow--previous" type="button" data-gallery-previous aria-label="Foto anterior" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8592;</button>
+            <button class="elite-vehicle-gallery__arrow elite-vehicle-gallery__arrow--next" type="button" data-gallery-next aria-label="Próxima foto" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8594;</button>
+            <p class="elite-vehicle-gallery__count" aria-live="polite"><span data-gallery-current>01</span> / <?= str_pad((string) count($galeriaVeiculo), 2, '0', STR_PAD_LEFT) ?></p>
         </section>
 
-        <div class="luxcars-vehicle-detail__layout">
-            <article class="luxcars-vehicle-info">
-                <p class="luxcars-vehicle-info__eyebrow">LuxCars · estoque selecionado</p>
-                <h1><?= luxcarsDetalhesEscape($nomeVeiculo) ?></h1>
+        <div class="elite-vehicle-detail__layout">
+            <article class="elite-vehicle-info">
+                <p class="elite-vehicle-info__eyebrow">ELITE · estoque selecionado</p>
+                <h1><?= eliteDetalhesEscape($nomeVeiculo) ?></h1>
                 <?php if ($carro->getVersao() !== null && trim($carro->getVersao()) !== ''): ?>
-                    <p class="luxcars-vehicle-info__version"><?= luxcarsDetalhesEscape($carro->getVersao()) ?></p>
+                    <p class="elite-vehicle-info__version"><?= eliteDetalhesEscape($carro->getVersao()) ?></p>
                 <?php endif; ?>
                 <?php if ($carro->getDescricao() !== null && trim($carro->getDescricao()) !== ''): ?>
-                    <p class="luxcars-vehicle-info__description"><?= luxcarsDetalhesEscape($carro->getDescricao()) ?></p>
+                    <p class="elite-vehicle-info__description"><?= eliteDetalhesEscape($carro->getDescricao()) ?></p>
                 <?php endif; ?>
 
                 <h2>Detalhes do veículo</h2>
-                <dl class="luxcars-vehicle-specs">
-                    <div><dt>Ano</dt><dd><?= luxcarsDetalhesEscape($carro->getAno()) ?></dd></div>
+                <dl class="elite-vehicle-specs">
+                    <div><dt>Ano</dt><dd><?= eliteDetalhesEscape($carro->getAno()) ?></dd></div>
                     <div><dt>Quilometragem</dt><dd><?= $carro->getQuilometragem() === null ? 'Sob consulta' : number_format($carro->getQuilometragem(), 0, ',', '.') . ' km' ?></dd></div>
-                    <div><dt>Combustível</dt><dd><?= luxcarsDetalhesEscape($carro->getCombustivel() ?: 'Sob consulta') ?></dd></div>
-                    <div><dt>Câmbio</dt><dd><?= luxcarsDetalhesEscape($carro->getCambio() ?: 'Sob consulta') ?></dd></div>
-                    <div><dt>Cor</dt><dd><?= luxcarsDetalhesEscape($carro->getCor() ?: 'Sob consulta') ?></dd></div>
-                    <div><dt>Versão</dt><dd><?= luxcarsDetalhesEscape($carro->getVersao() ?: 'Sob consulta') ?></dd></div>
+                    <div><dt>Combustível</dt><dd><?= eliteDetalhesEscape($carro->getCombustivel() ?: 'Sob consulta') ?></dd></div>
+                    <div><dt>Câmbio</dt><dd><?= eliteDetalhesEscape($carro->getCambio() ?: 'Sob consulta') ?></dd></div>
+                    <div><dt>Cor</dt><dd><?= eliteDetalhesEscape($carro->getCor() ?: 'Sob consulta') ?></dd></div>
+                    <div><dt>Versão</dt><dd><?= eliteDetalhesEscape($carro->getVersao() ?: 'Sob consulta') ?></dd></div>
                 </dl>
                 <?php if ($carro->getInformacoesAdicionais() !== null && trim($carro->getInformacoesAdicionais()) !== ''): ?>
-                    <div class="luxcars-vehicle-info__extra">
+                    <div class="elite-vehicle-info__extra">
                         <h2>Sobre este modelo</h2>
-                        <p><?= luxcarsDetalhesEscape($carro->getInformacoesAdicionais()) ?></p>
+                        <p><?= eliteDetalhesEscape($carro->getInformacoesAdicionais()) ?></p>
                     </div>
                 <?php endif; ?>
-                <p class="luxcars-vehicle-info__availability"><span aria-hidden="true"></span> Disponível para consulta</p>
+                <p class="elite-vehicle-info__availability"><span aria-hidden="true"></span> Disponível para consulta</p>
             </article>
 
-            <aside class="luxcars-vehicle-contact" aria-labelledby="interesse-titulo">
-                <p class="luxcars-vehicle-contact__eyebrow">Atendimento exclusivo</p>
-                <p class="luxcars-vehicle-contact__price">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></p>
+            <aside class="elite-vehicle-contact" aria-labelledby="interesse-titulo">
+                <p class="elite-vehicle-contact__eyebrow">Atendimento exclusivo</p>
+                <p class="elite-vehicle-contact__price">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></p>
                 <h2 id="interesse-titulo">Tenho interesse</h2>
-                <p class="luxcars-vehicle-contact__intro">Envie seus dados e nossa equipe retorna para conversar sobre este veículo.</p>
-                <form action="contato.php" method="post" class="luxcars-vehicle-contact__form">
-                    <input type="hidden" name="csrf_token" value="<?= luxcarsDetalhesEscape($csrfToken) ?>">
-                    <input type="hidden" name="assunto" value="<?= luxcarsDetalhesEscape('Interesse em ' . $nomeVeiculo) ?>">
-                    <div class="luxcars-vehicle-contact__honeypot" aria-hidden="true">
+                <p class="elite-vehicle-contact__intro">Envie seus dados e nossa equipe retorna para conversar sobre este veículo.</p>
+                <form action="contato.php" method="post" class="elite-vehicle-contact__form">
+                    <input type="hidden" name="csrf_token" value="<?= eliteDetalhesEscape($csrfToken) ?>">
+                    <input type="hidden" name="assunto" value="<?= eliteDetalhesEscape('Interesse em ' . $nomeVeiculo) ?>">
+                    <div class="elite-vehicle-contact__honeypot" aria-hidden="true">
                         <label for="website">Deixe este campo vazio</label>
                         <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
                     </div>
@@ -270,31 +282,31 @@ $galeriaVeiculo = $carro === null ? [] : luxcarsDetalhesGaleria($carro);
                         <input id="interesse-email" name="email" type="email" autocomplete="email" maxlength="190" placeholder="voce@exemplo.com" required>
                     </label>
                     <label for="interesse-mensagem">Mensagem
-                        <textarea id="interesse-mensagem" name="mensagem" minlength="10" maxlength="5000" required>Olá, tenho interesse no <?= luxcarsDetalhesEscape($nomeVeiculo) ?>. Gostaria de receber mais informações.</textarea>
+                        <textarea id="interesse-mensagem" name="mensagem" minlength="10" maxlength="5000" required>Olá, tenho interesse no <?= eliteDetalhesEscape($nomeVeiculo) ?>. Gostaria de receber mais informações.</textarea>
                     </label>
                     <button type="submit">Solicitar contato</button>
                 </form>
-                <div class="luxcars-vehicle-contact__actions">
+                <div class="elite-vehicle-contact__actions">
                     <?php if (isset($_SESSION['usuario_id'])): ?>
                         <form action="carrinho.php" method="post">
-                            <input type="hidden" name="csrf_token" value="<?= luxcarsDetalhesEscape($csrfToken) ?>">
+                            <input type="hidden" name="csrf_token" value="<?= eliteDetalhesEscape($csrfToken) ?>">
                             <input type="hidden" name="acao" value="adicionar">
-                            <input type="hidden" name="carro_id" value="<?= luxcarsDetalhesEscape($carro->getId()) ?>">
-                            <button class="luxcars-vehicle-contact__secondary" type="submit">Adicionar ao carrinho</button>
+                            <input type="hidden" name="carro_id" value="<?= eliteDetalhesEscape($carro->getId()) ?>">
+                            <button class="elite-vehicle-contact__secondary" type="submit">Adicionar ao carrinho</button>
                         </form>
                     <?php endif; ?>
                     <a href="pagamento.php?id=<?= rawurlencode((string) $carro->getId()) ?>">Ver formas de pagamento</a>
                 </div>
                 <?php if (isset($_SESSION['usuario_id'])): ?>
-                    <div class="luxcars-vehicle-contact__account-actions">
+                    <div class="elite-vehicle-contact__account-actions">
                         <form method="post" action="favoritos.php">
-                            <input type="hidden" name="csrf_token" value="<?= luxcarsDetalhesEscape($csrfToken) ?>">
+                            <input type="hidden" name="csrf_token" value="<?= eliteDetalhesEscape($csrfToken) ?>">
                             <input type="hidden" name="acao" value="adicionar">
                             <input type="hidden" name="carro_id" value="<?= (int) $carro->getId() ?>">
                             <button type="submit">Salvar nos favoritos</button>
                         </form>
                         <form method="post" action="comparar.php">
-                            <input type="hidden" name="csrf_token" value="<?= luxcarsDetalhesEscape($csrfToken) ?>">
+                            <input type="hidden" name="csrf_token" value="<?= eliteDetalhesEscape($csrfToken) ?>">
                             <input type="hidden" name="acao" value="adicionar">
                             <input type="hidden" name="carro_id" value="<?= (int) $carro->getId() ?>">
                             <button type="submit">Comparar</button>
@@ -303,14 +315,14 @@ $galeriaVeiculo = $carro === null ? [] : luxcarsDetalhesGaleria($carro);
                 <?php endif; ?>
             </aside>
         </div>
-        <p class="luxcars-vehicle-detail__back"><a href="paginadecompra.php">← Voltar ao catálogo</a></p>
+        <p class="elite-vehicle-detail__back"><a href="paginadecompra.php">← Voltar ao catálogo</a></p>
     <?php endif; ?>
 </main>
 <script>
 (() => {
     const gallery = document.querySelector('[data-vehicle-gallery]');
-    const viewport = gallery?.querySelector('.luxcars-vehicle-gallery__viewport');
-    const track = gallery?.querySelector('.luxcars-vehicle-gallery__track');
+    const viewport = gallery?.querySelector('.elite-vehicle-gallery__viewport');
+    const track = gallery?.querySelector('.elite-vehicle-gallery__track');
     const previous = gallery?.querySelector('[data-gallery-previous]');
     const next = gallery?.querySelector('[data-gallery-next]');
     const current = gallery?.querySelector('[data-gallery-current]');
@@ -339,23 +351,15 @@ $galeriaVeiculo = $carro === null ? [] : luxcarsDetalhesGaleria($carro);
     track.addEventListener('error', event => {
         const image = event.target;
         if (!(image instanceof HTMLImageElement)) return;
-        const item = image.closest('.luxcars-vehicle-gallery__item');
+        const item = image.closest('.elite-vehicle-gallery__item');
         if (!item) return;
-        const search = document.createElement('a');
-        search.className = 'luxcars-vehicle-gallery__item luxcars-vehicle-gallery__search';
-        search.href = item.dataset.fallbackUrl;
-        search.target = '_blank';
-        search.rel = 'noopener noreferrer';
-        const icon = document.createElement('span');
-        icon.className = 'luxcars-vehicle-gallery__search-icon';
-        icon.setAttribute('aria-hidden', 'true');
-        icon.textContent = '↗';
-        const label = document.createElement('span');
-        label.textContent = 'Foto indisponível · buscar no Google';
-        const title = document.createElement('small');
-        title.textContent = item.dataset.fallbackTitle || '';
-        search.append(icon, label, title);
-        item.replaceWith(search);
+        const fallbackSrc = item.dataset.fallbackSrc || '';
+        if (fallbackSrc && !item.dataset.fallbackAttempted && image.src !== fallbackSrc) {
+            item.dataset.fallbackAttempted = 'true';
+            image.src = fallbackSrc;
+            return;
+        }
+        item.remove();
         update();
     }, true);
     update();

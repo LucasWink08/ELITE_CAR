@@ -2,4 +2,4 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/bootstrap.php';
-(new \LuxCars\Controllers\CarroController())->detalhes();
+(new \Elite\Controllers\CarroController())->detalhes();

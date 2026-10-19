@@ -28,7 +28,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 spl_autoload_register(static function (string $class): void {
-    $prefix = 'LuxCars\\';
+    $prefix = 'Elite\\';
     if (!str_starts_with($class, $prefix)) {
         return;
     }

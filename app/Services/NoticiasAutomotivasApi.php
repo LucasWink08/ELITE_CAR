@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Services;
+namespace Elite\Services;
 
 use RuntimeException;
 
@@ -16,7 +16,7 @@ final class NoticiasAutomotivasApi
         }
 
         $query = http_build_query([
-            'topic.id' => 'industry.automotive_news',
+            'title' => 'Automotive News',
             'language.code' => 'pt',
             'per_page' => 10,
             'page' => 1,

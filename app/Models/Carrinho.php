@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
-use LuxCars\Entities\Carro;
+use Elite\Entities\Carro;
 
 final class Carrinho
 {

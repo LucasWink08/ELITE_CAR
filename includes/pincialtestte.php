@@ -50,7 +50,6 @@
                 <ul class="flex space-x-5 text-white">
                     <li class="gtimes"><p class="hover-effect"><a href="../paginas/paginadeecompra.php" class="hover:text-yellow-500 transition duration-150 ease-in-out">COMPRAR</a></p></li>
                     <li class="gtimes"><p class="hover-effect"><a href="../paginas/anunciar.html" class="hover:text-yellow-500">ANUNCIAR</a></p></li>
-                    <li class="gtimes"><p class="hover-effect"><a href="../paginas/tabelafipe.html" class="hover:text-yellow-500">TABELA FIPE</a></p></li>
                     <li class="gtimes"><p class="hover-effect"><a href="../paginas/contato.html" class="hover:text-yellow-500">CONTATO</a></p></li>
                 </ul>
             </div>

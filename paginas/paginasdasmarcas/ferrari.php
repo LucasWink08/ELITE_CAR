@@ -40,7 +40,7 @@
 <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-8 p-8">
 
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/ferrarr.webp" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -59,7 +59,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm  w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm  w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/f40.webp" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -78,7 +78,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/f8spider.jpg" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -97,7 +97,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/Ferrari 458 Italia.jpg" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -117,7 +117,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/ferrari-488 pista.jpg" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -137,7 +137,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/ferrari-purosangue-divulgacao1.jpg" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -157,7 +157,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/Ferrari296gtb.webp" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -176,7 +176,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/Ferrari_FXX_K_Evo.webp" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -195,7 +195,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-sm w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/laferrari.jpg" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">
@@ -214,7 +214,7 @@
                 </a>
             </div>
         </div>
-        <div class="luxcars-car-card max-w-lg w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
+        <div class="elite-car-card max-w-lg w-64 p-4 rounded-xl bg-white shadow-lg flex flex-col items-center">
             <img src="../../assets/imagens/cars/ferrari/novitec-ferrari-sf90-stradale-2022.webp" alt="Carro"
                 class="h-40 w-full object-cover rounded-t-xl">
             <div class="p-3 text-center">

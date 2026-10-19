@@ -1,4 +1,4 @@
-USE luxcars;
+USE elite;
 
 -- Execute uma vez apenas em bancos criados pelo schema anterior.
 ALTER TABLE carros

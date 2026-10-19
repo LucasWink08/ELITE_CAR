@@ -40,10 +40,10 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2 ">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm3g80cs/ozzwbctnd6qvqfj0xqtw.avif" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm3g80cs/P90492764-the-all-new-bmw-m3-cs-interieur-01-2023-2250px.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm3g80cs/S0-la-m3-cs-en-fuite-743077.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm3g80cs/P90492764-the-all-new-bmw-m3-cs-interieur-01-2023-2250px.jpg" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm3g80cs/P90492764-the-all-new-bmw-m3-cs-interieur-01-2023-2250px.jpg" alt="" class="w-full h-full object-cover">

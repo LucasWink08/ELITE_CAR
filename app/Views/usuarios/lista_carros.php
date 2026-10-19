@@ -1,42 +1,56 @@
 <?php
 declare(strict_types=1);
-function luxcarsListaEscape(mixed $value): string { return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8'); }
+
+function eliteListaEscape(mixed $value): string
+{
+    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+}
+
+$idsSelecionados = array_map(static fn (array $carro): int => (int) $carro['id'], $carros);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxCars | <?= luxcarsListaEscape($titulo) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELITE | <?= eliteListaEscape($titulo) ?></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/fonte.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-compare-specs-top">
 </head>
 <body class="min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
-<main class="mx-auto max-w-7xl space-y-6 p-6 sm:p-8">
-    <h1 class="text-center text-4xl font-bold"><?= luxcarsListaEscape($titulo) ?></h1>
-    <?php if ($mensagem !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= luxcarsListaEscape($mensagem) ?></p><?php endif; ?>
-    <?php if ($erro !== null): ?><p class="rounded bg-red-900 p-4" role="alert"><?= luxcarsListaEscape($erro) ?></p><?php endif; ?>
+<main class="elite-account-list-page">
     <?php if ($modo === 'favoritos'): ?>
+        <header class="elite-account-list-heading">
+            <p class="elite-account-list-eyebrow">Sua garagem</p>
+            <h1><?= eliteListaEscape($titulo) ?></h1>
+            <p>Os modelos que você guardou para rever depois.</p>
+        </header>
+        <?php if ($mensagem !== null): ?><p class="elite-account-alert elite-account-alert--success" role="status"><?= eliteListaEscape($mensagem) ?></p><?php endif; ?>
+        <?php if ($erro !== null): ?><p class="elite-account-alert elite-account-alert--error" role="alert"><?= eliteListaEscape($erro) ?></p><?php endif; ?>
         <?php if ($carros === []): ?>
-            <p class="rounded bg-gray-800 p-6 text-center">Você ainda não salvou veículos.</p>
+            <section class="elite-account-empty"><span aria-hidden="true">♡</span><h2>Sua lista começa aqui</h2><p>Salve os veículos que chamarem sua atenção e encontre todos neste espaço.</p><a href="paginadecompra.php">Explorar veículos <span aria-hidden="true">→</span></a></section>
         <?php else: ?>
-            <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <section class="elite-favorites-grid">
                 <?php foreach ($carros as $carro): ?>
-                    <article class="luxcars-car-card">
-                        <?php if (!empty($carro['imagem'])): ?><img class="luxcars-car-card__image" src="<?= luxcarsListaEscape('../' . ltrim((string) $carro['imagem'], '/')) ?>" alt="<?= luxcarsListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?>" loading="lazy"><?php else: ?><div class="luxcars-car-card__placeholder">Imagem indisponível</div><?php endif; ?>
-                        <div class="luxcars-car-card__content">
-                            <h2 class="luxcars-car-card__title"><?= luxcarsListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?></h2>
-                            <p class="luxcars-car-card__eyebrow">Ano <?= (int) $carro['ano'] ?></p>
-                            <p class="luxcars-car-card__price">R$ <?= number_format((float) $carro['preco'], 2, ',', '.') ?></p>
-                            <a class="luxcars-car-card__button" href="detalhes.php?id=<?= (int) $carro['id'] ?>">Ver detalhes</a>
-                            <div class="flex flex-wrap gap-3">
-                                <form method="post" action="favoritos.php" onsubmit="return confirm('Remover dos favoritos?')">
-                                    <input type="hidden" name="csrf_token" value="<?= luxcarsListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="remover"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>">
-                                    <button class="text-red-700 underline" type="submit">Remover favorito</button>
+                    <article class="elite-favorite-card">
+                        <a class="elite-favorite-card__image" href="detalhes.php?id=<?= (int) $carro['id'] ?>">
+                            <?php if (!empty($carro['imagem'])): ?><img src="<?= eliteListaEscape('../' . ltrim((string) $carro['imagem'], '/')) ?>" alt="<?= eliteListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?>" loading="lazy"><?php else: ?><span>Imagem indisponível</span><?php endif; ?>
+                        </a>
+                        <div class="elite-favorite-card__body">
+                            <p><?= eliteListaEscape($carro['marca']) ?> <span>·</span> <?= (int) $carro['ano'] ?></p>
+                            <h2><?= eliteListaEscape($carro['modelo']) ?></h2>
+                            <strong>R$ <?= number_format((float) $carro['preco'], 2, ',', '.') ?></strong>
+                            <a class="elite-favorite-card__details" href="detalhes.php?id=<?= (int) $carro['id'] ?>">Ver detalhes <span aria-hidden="true">→</span></a>
+                            <div class="elite-favorite-card__actions">
+                                <form method="post" action="favoritos.php">
+                                    <input type="hidden" name="csrf_token" value="<?= eliteListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="remover"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>">
+                                    <button type="submit">Remover favorito</button>
                                 </form>
                                 <form method="post" action="comparar.php">
-                                    <input type="hidden" name="csrf_token" value="<?= luxcarsListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="adicionar"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>">
-                                    <button class="text-blue-800 underline" type="submit">Adicionar à comparação</button>
+                                    <input type="hidden" name="csrf_token" value="<?= eliteListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="adicionar"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>">
+                                    <button type="submit">Comparar</button>
                                 </form>
                             </div>
                         </div>
@@ -44,37 +58,81 @@ function luxcarsListaEscape(mixed $value): string { return htmlspecialchars((str
                 <?php endforeach; ?>
             </section>
         <?php endif; ?>
+        <a class="elite-account-back-link" href="perfil.php">← Voltar ao perfil</a>
     <?php else: ?>
+        <header class="elite-compare-heading">
+            <div>
+                <p class="elite-account-list-eyebrow">Escolha com confiança</p>
+                <h1><?= eliteListaEscape($titulo) ?></h1>
+                <p>Compare os detalhes lado a lado e encontre o modelo certo para você.</p>
+            </div>
+            <div class="elite-compare-count"><strong><?= count($carros) ?></strong><span>de 3 veículos</span><div class="elite-compare-count__bar"><span style="width: <?= min(100, count($carros) / 3 * 100) ?>%"></span></div></div>
+        </header>
+        <?php if ($mensagem !== null): ?><p class="elite-account-alert elite-account-alert--success" role="status"><?= eliteListaEscape($mensagem) ?></p><?php endif; ?>
+        <?php if ($erro !== null): ?><p class="elite-account-alert elite-account-alert--error" role="alert"><?= eliteListaEscape($erro) ?></p><?php endif; ?>
+
+        <section class="elite-compare-add-card" aria-labelledby="adicionar-comparacao-titulo">
+            <div class="elite-compare-add-copy"><span class="elite-compare-add-icon" aria-hidden="true">＋</span><div><h2 id="adicionar-comparacao-titulo">Monte sua comparação</h2><p>Adicione até três veículos disponíveis. Você pode trocar os modelos quando quiser.</p></div></div>
+            <?php if (count($carros) < 3): ?>
+                <?php $opcoesRestantes = array_filter($opcoesCarros, static fn ($opcao): bool => !in_array($opcao->getId(), $idsSelecionados, true)); ?>
+                <?php if ($opcoesRestantes !== []): ?>
+                    <form class="elite-compare-add-form" method="post" action="comparar.php">
+                        <input type="hidden" name="csrf_token" value="<?= eliteListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="adicionar">
+                        <label class="sr-only" for="comparar-carro">Escolha um veículo</label>
+                        <select id="comparar-carro" name="carro_id" required>
+                            <option value="">Selecione um veículo</option>
+                            <?php foreach ($opcoesRestantes as $opcao): ?><option value="<?= (int) $opcao->getId() ?>"><?= eliteListaEscape($opcao->getMarca() . ' ' . $opcao->getModelo() . ' · ' . $opcao->getAno()) ?></option><?php endforeach; ?>
+                        </select>
+                        <button type="submit">Adicionar veículo <span aria-hidden="true">→</span></button>
+                    </form>
+                <?php else: ?>
+                    <p class="elite-compare-limit-note">Não há outros veículos disponíveis para adicionar.</p>
+                <?php endif; ?>
+            <?php else: ?>
+                <p class="elite-compare-limit-note">Você chegou ao limite. Remova um modelo para adicionar outro.</p>
+            <?php endif; ?>
+        </section>
+
         <?php if ($carros === []): ?>
-            <p class="rounded bg-gray-800 p-6 text-center">Adicione até três veículos disponíveis para comparar.</p>
+            <section class="elite-account-empty elite-compare-empty"><span aria-hidden="true">⇄</span><h2>Nenhum veículo selecionado</h2><p>Use o seletor acima para começar uma comparação ou escolha um carro no catálogo.</p><a href="paginadecompra.php">Abrir catálogo <span aria-hidden="true">→</span></a></section>
         <?php else: ?>
-            <form method="post" action="comparar.php" class="text-right" onsubmit="return confirm('Limpar todos os veículos da comparação?')">
-                <input type="hidden" name="csrf_token" value="<?= luxcarsListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="limpar">
-                <button type="submit" class="rounded border border-red-300 px-4 py-2 text-red-200">Limpar comparação</button>
-            </form>
-            <div class="overflow-x-auto rounded-xl bg-white text-black shadow">
-                <table class="min-w-full border-collapse text-left">
-                    <thead><tr><th class="min-w-36 bg-gray-100 p-3">Característica</th><?php foreach ($carros as $carro): ?><th class="min-w-56 border-l p-3"><?= luxcarsListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?></th><?php endforeach; ?></tr></thead>
+            <?php $especificacoes = [
+                'Ano' => static fn (array $c): string => (string) $c['ano'],
+                'Preço' => static fn (array $c): string => 'R$ ' . number_format((float) $c['preco'], 2, ',', '.'),
+                'Quilometragem' => static fn (array $c): string => $c['quilometragem'] === null ? 'Não informado' : number_format((int) $c['quilometragem'], 0, ',', '.') . ' km',
+                'Combustível' => static fn (array $c): string => trim((string) $c['combustivel']) !== '' ? (string) $c['combustivel'] : 'Não informado',
+                'Câmbio' => static fn (array $c): string => trim((string) $c['cambio']) !== '' ? (string) $c['cambio'] : 'Não informado',
+                'Cor' => static fn (array $c): string => trim((string) $c['cor']) !== '' ? (string) $c['cor'] : 'Não informada',
+                'Versão' => static fn (array $c): string => trim((string) $c['versao']) !== '' ? (string) $c['versao'] : 'Não informada',
+                'Disponibilidade' => static fn (array $c): string => match ($c['status']) { 'disponivel' => 'Disponível', 'vendido' => 'Vendido', default => 'Indisponível' },
+            ]; ?>
+            <div class="elite-compare-toolbar"><span>Os campos diferentes entre os modelos aparecem destacados.</span><form method="post" action="comparar.php" onsubmit="return confirm('Limpar todos os veículos da comparação?')"><input type="hidden" name="csrf_token" value="<?= eliteListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="limpar"><button type="submit">Limpar comparação</button></form></div>
+            <div class="elite-compare-table-scroll">
+                <table class="elite-compare-table">
+                    <thead><tr><th class="elite-compare-row-label"><span>Especificações</span></th>
+                        <?php foreach ($carros as $carro): ?>
+                            <th class="elite-compare-vehicle">
+                                <div class="elite-compare-vehicle__image"><?php if (!empty($carro['imagem'])): ?><img src="<?= eliteListaEscape('../' . ltrim((string) $carro['imagem'], '/')) ?>" alt="<?= eliteListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?>" loading="lazy"><?php else: ?><span>Imagem indisponível</span><?php endif; ?></div>
+                                <p><?= eliteListaEscape($carro['marca']) ?></p><h2><?= eliteListaEscape($carro['modelo']) ?></h2>
+                                <div class="elite-compare-vehicle__actions"><a href="detalhes.php?id=<?= (int) $carro['id'] ?>">Ver detalhes</a><form method="post" action="comparar.php"><input type="hidden" name="csrf_token" value="<?= eliteListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="remover"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>"><button type="submit" aria-label="Remover <?= eliteListaEscape($carro['marca'] . ' ' . $carro['modelo']) ?> da comparação">Remover</button></form></div>
+                            </th>
+                        <?php endforeach; ?>
+                    </tr></thead>
                     <tbody>
-                    <?php foreach ([
-                        'Imagem' => fn ($c) => !empty($c['imagem']) ? '<img class="h-32 w-full rounded object-cover" src="' . luxcarsListaEscape('../' . ltrim((string) $c['imagem'], '/')) . '" alt="' . luxcarsListaEscape($c['marca'] . ' ' . $c['modelo']) . '">' : 'Sem imagem',
-                        'Ano' => fn ($c) => (string) $c['ano'],
-                        'Preço' => fn ($c) => 'R$ ' . number_format((float) $c['preco'], 2, ',', '.'),
-                        'Quilometragem' => fn ($c) => $c['quilometragem'] === null ? 'Não informado' : number_format((int) $c['quilometragem'], 0, ',', '.') . ' km',
-                        'Combustível' => fn ($c) => $c['combustivel'] ?: 'Não informado',
-                        'Câmbio' => fn ($c) => $c['cambio'] ?: 'Não informado',
-                        'Cor' => fn ($c) => $c['cor'] ?: 'Não informada',
-                        'Disponibilidade' => fn ($c) => $c['status'],
-                    ] as $rotulo => $formatar): ?>
-                        <tr class="border-t"><th class="bg-gray-50 p-3"><?= luxcarsListaEscape($rotulo) ?></th><?php foreach ($carros as $carro): ?><td class="border-l p-3"><?php if ($rotulo === 'Imagem'): ?><?= $formatar($carro) ?><?php else: ?><?= luxcarsListaEscape($formatar($carro)) ?><?php endif; ?></td><?php endforeach; ?></tr>
-                    <?php endforeach; ?>
-                    <tr class="border-t"><th class="bg-gray-50 p-3">Ações</th><?php foreach ($carros as $carro): ?><td class="space-y-2 border-l p-3"><a class="block underline" href="detalhes.php?id=<?= (int) $carro['id'] ?>">Ver detalhes</a><form method="post" action="comparar.php"><input type="hidden" name="csrf_token" value="<?= luxcarsListaEscape($csrfToken) ?>"><input type="hidden" name="acao" value="remover"><input type="hidden" name="carro_id" value="<?= (int) $carro['id'] ?>"><button class="text-red-700 underline" type="submit">Remover</button></form></td><?php endforeach; ?></tr>
+                        <?php foreach ($especificacoes as $rotulo => $formatar): ?>
+                            <?php $valores = array_map($formatar, $carros); $diferentes = count(array_unique($valores)) > 1; ?>
+                            <tr><th class="elite-compare-row-label"><?= eliteListaEscape($rotulo) ?></th>
+                                <?php foreach ($carros as $indice => $carro): ?>
+                                    <td class="<?= $diferentes ? 'is-different' : '' ?> <?= $valores[$indice] === 'Não informado' || $valores[$indice] === 'Não informada' ? 'is-unavailable' : '' ?>"><span><?= eliteListaEscape($valores[$indice]) ?></span><?php if ($rotulo === 'Preço' && (float) $carro['preco'] === min(array_map(static fn (array $item): float => (float) $item['preco'], $carros))): ?><small>Menor preço</small><?php endif; ?></td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         <?php endif; ?>
+        <div class="elite-account-bottom-links"><a class="elite-account-back-link" href="paginadecompra.php">← Voltar ao catálogo</a><a class="elite-account-back-link" href="perfil.php">Voltar ao perfil →</a></div>
     <?php endif; ?>
-    <p><a class="underline" href="paginadecompra.php">Voltar ao catálogo</a></p>
 </main>
 <?php require dirname(__DIR__, 3) . '/includes/footer.php'; ?>
 </body>

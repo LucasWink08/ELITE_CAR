@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace LuxCars\Models;
+namespace Elite\Models;
 
-use LuxCars\Core\Conexao;
-use LuxCars\Entities\Carro as CarroEntity;
+use Elite\Core\Conexao;
+use Elite\Entities\Carro as CarroEntity;
 use PDO;
 
 /** Repositório de persistência e consultas de veículos. */

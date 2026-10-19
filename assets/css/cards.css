@@ -1,11 +1,11 @@
 /* Shared vehicle card treatment for database views and legacy brand catalogs. */
 @font-face {
-    font-family: "luxcars-display";
+    font-family: "elite-display";
     src: url("../fontes/good%20Times%20Rg.otf") format("opentype");
     font-display: swap;
 }
-.luxcars-car-card,
-.luxcars-car-card.luxcars-car-card {
+.elite-car-card,
+.elite-car-card.elite-car-card {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -21,19 +21,19 @@
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
-.luxcars-car-card.luxcars-car-card:hover {
+.elite-car-card.elite-car-card:hover {
     transform: translateY(-2px);
     border-color: rgba(255, 255, 255, .22);
     box-shadow: 0 8px 20px rgba(0, 0, 0, .24);
 }
 
-.luxcars-car-card:focus-within {
+.elite-car-card:focus-within {
     outline: 3px solid rgba(255, 255, 255, .65);
     outline-offset: 3px;
 }
 
-.luxcars-car-card > img,
-.luxcars-car-card__image {
+.elite-car-card > img,
+.elite-car-card__image {
     display: block;
     width: 100%;
     height: auto;
@@ -43,8 +43,8 @@
     background: #e5e7eb;
 }
 
-.luxcars-car-card > div:not(.luxcars-car-card__placeholder),
-.luxcars-car-card__content {
+.elite-car-card > div:not(.elite-car-card__placeholder),
+.elite-car-card__content {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -53,8 +53,8 @@
     padding: 1rem;
 }
 
-.luxcars-car-card > div.p-3,
-.luxcars-car-card > div.p-2 {
+.elite-car-card > div.p-3,
+.elite-car-card > div.p-2 {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -63,21 +63,21 @@
     text-align: left;
 }
 
-.luxcars-car-card h2,
-.luxcars-car-card h3,
-.luxcars-car-card h1,
-.luxcars-car-card__title {
+.elite-car-card h2,
+.elite-car-card h3,
+.elite-car-card h1,
+.elite-car-card__title {
     margin: 0;
     color: #fff;
     font-size: 1.15rem;
-    font-family: "luxcars-display", Arial, sans-serif;
+    font-family: "elite-display", Arial, sans-serif;
     font-weight: 750;
     line-height: 1.35;
     letter-spacing: -.015em;
     text-transform: uppercase;
 }
 
-.luxcars-car-card p {
+.elite-car-card p {
     margin-top: 0;
     margin-bottom: 0;
     color: #c4c8d0;
@@ -85,7 +85,7 @@
     line-height: 1.55;
 }
 
-.luxcars-car-card .luxcars-car-card__eyebrow {
+.elite-car-card .elite-car-card__eyebrow {
     display: inline-flex;
     align-items: center;
     width: fit-content;
@@ -100,27 +100,27 @@
     text-transform: uppercase;
 }
 
-.luxcars-car-card .luxcars-car-card__price,
-.luxcars-car-card > div.p-3 > p:last-child {
+.elite-car-card .elite-car-card__price,
+.elite-car-card > div.p-3 > p:last-child {
     margin-top: auto;
     padding-top: .45rem;
     color: #fff;
     text-shadow: 0 0 16px rgba(255, 255, 255, .22);
     font-size: 1.2rem;
-    font-family: "luxcars-display", Arial, sans-serif;
+    font-family: "elite-display", Arial, sans-serif;
     font-weight: 800;
     line-height: 1.3;
 }
 
-.luxcars-car-card > div.mt-4,
-.luxcars-car-card__actions {
+.elite-car-card > div.mt-4,
+.elite-car-card__actions {
     width: 100%;
     margin-top: auto;
     padding: 0 1rem 1rem;
 }
 
-.luxcars-car-card .luxcars-car-card__button,
-.luxcars-car-card > div.mt-4 > a {
+.elite-car-card .elite-car-card__button,
+.elite-car-card > div.mt-4 > a {
     display: flex;
     min-height: 2.8rem;
     width: 100%;
@@ -140,14 +140,14 @@
     transition: background .18s ease, color .18s ease, box-shadow .18s ease;
 }
 
-.luxcars-car-card .luxcars-car-card__button:hover,
-.luxcars-car-card > div.mt-4 > a:hover {
+.elite-car-card .elite-car-card__button:hover,
+.elite-car-card > div.mt-4 > a:hover {
     color: #050505;
     background: linear-gradient(180deg, #fff 0%, #d1d5db 100%);
     box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(255, 255, 255, .14);
 }
 
-.luxcars-car-card__placeholder {
+.elite-car-card__placeholder {
     display: grid;
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -156,7 +156,7 @@
     background: #202020;
 }
 
-.luxcars-car-card__meta {
+.elite-car-card__meta {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem 1rem;
@@ -164,21 +164,21 @@
     font-size: .85rem;
 }
 
-.luxcars-car-card .underline,
-.luxcars-car-card button.underline {
+.elite-car-card .underline,
+.elite-car-card button.underline {
     color: #d1d5db;
     text-decoration-color: rgba(255, 255, 255, .45);
     text-underline-offset: 3px;
 }
 
-.luxcars-car-card .underline:hover,
-.luxcars-car-card button.underline:hover {
+.elite-car-card .underline:hover,
+.elite-car-card button.underline:hover {
     color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .luxcars-car-card,
-    .luxcars-car-card > img {
+    .elite-car-card,
+    .elite-car-card > img {
         transition: none;
     }
 }

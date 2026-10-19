@@ -40,13 +40,13 @@
 <?php require_once __DIR__ . '/../../../includes/navbar.php'; ?>
   <div class="justify between w-screen flex h-[500px] gap-x-2">
     <div class="justify-left w-[33%] h-full">
-       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/bmw-m8-painel-interior.webp" alt="" class="w-full h-full object-cover">
+       <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/BMW-M8-Grand-Coup%C3%A9-Competition-6-C%C3%B3pia.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-center w-[34%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/2020-bmw-m8-gran-coupe-competition.jpg" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/BMW-M8-Grand-Coup%C3%A9-Competition-6-C%C3%B3pia.webp" alt="" class="w-full h-full object-cover">
     </div>
     <div class="justify-right w-[33%]  h-full">
-      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/BMW-M8-Grand-Coupé-Competition-6-Cópia.webp" alt="" class="w-full h-full object-cover">
+      <img src="../../../assets/imagens/cars/imgsanuncios/bmw/bmwm8grancoupe/BMW-M8-Grand-Coup%C3%A9-Competition-6-C%C3%B3pia.webp" alt="" class="w-full h-full object-cover">
     </div>
   </div>
 
