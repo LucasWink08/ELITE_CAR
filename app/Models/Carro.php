@@ -23,6 +23,30 @@ final class Carro
         return $this->buscarDisponiveis([]);
     }
 
+    /** @return array<int, string> */
+    public function listarOpcoesFiltro(string $campo): array
+    {
+        $coluna = match ($campo) {
+            'combustivel' => 'combustivel',
+            'cambio' => 'cambio',
+            default => throw new \InvalidArgumentException('Campo de filtro invalido.'),
+        };
+
+        $statement = $this->database->query(
+            "SELECT DISTINCT TRIM({$coluna}) AS opcao
+             FROM carros
+             WHERE status = 'disponivel'
+               AND {$coluna} IS NOT NULL
+               AND TRIM({$coluna}) <> ''
+             ORDER BY opcao"
+        );
+
+        return array_values(array_filter(array_map(
+            static fn (array $linha): string => trim((string) $linha['opcao']),
+            $statement->fetchAll()
+        ), static fn (string $opcao): bool => $opcao !== ''));
+    }
+
     /** @return array<int, CarroEntity> */
     public function listarTodos(): array
     {

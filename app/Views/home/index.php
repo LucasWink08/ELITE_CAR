@@ -14,10 +14,10 @@ function eliteHomeEscape(mixed $value): string
     <meta name="description" content="Encontre veículos premium na ELITE. Explore o catálogo e consulte os detalhes de cada modelo.">
     <title>ELITE | Veículos premium</title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261018-home-search-news">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-home-search">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-gray-950 text-white">
+<body class="elite-home-page min-h-screen bg-gray-950 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
 <main>
     <section class="elite-hero elite-home-carousel flex min-h-[68vh] items-center bg-cover bg-center px-6 py-20 sm:px-10 lg:px-16" aria-roledescription="carrossel" aria-label="Destaques ELITE" data-elite-carousel>
@@ -26,6 +26,9 @@ function eliteHomeEscape(mixed $value): string
             <div class="elite-home-carousel__slide" aria-hidden="true"><img src="../assets/imagens/carrosel/koenisseg.jpg" alt="Koenigsegg em destaque" loading="lazy"></div>
             <div class="elite-home-carousel__slide" aria-hidden="true"><img src="../assets/imagens/carrosel/mclarne%20sena.jpg" alt="McLaren Senna em destaque" loading="lazy"></div>
             <div class="elite-home-carousel__slide" aria-hidden="true"><img src="../assets/imagens/carrosel/mercedes.jpg" alt="Mercedes-Benz em destaque" loading="lazy"></div>
+        </div>
+        <div class="elite-home-brand-mark" aria-hidden="true">
+            <img src="../assets/imagens/logos/sem%20fundo.png" alt="" fetchpriority="high">
         </div>
         <div class="elite-home-carousel__content mx-auto w-full max-w-7xl">
             <p class="mb-4 font-semibold uppercase tracking-[.3em] text-amber-300">ELITE Ltda.</p>
@@ -36,23 +39,12 @@ function eliteHomeEscape(mixed $value): string
                 <a class="rounded border border-white/70 px-6 py-3 font-semibold transition hover:bg-white hover:text-black" href="contato.php">Falar com a equipe</a>
             </div>
         </div>
-        <div class="elite-home-carousel__controls" aria-label="Controles do carrossel">
-            <button class="elite-home-carousel__arrow" type="button" data-carousel-prev aria-label="Imagem anterior">&lsaquo;</button>
-            <div class="elite-home-carousel__dots" role="group" aria-label="Escolher destaque">
-                <button class="is-active" type="button" data-carousel-to="0" aria-label="Mostrar Ferrari" aria-current="true"></button>
-                <button type="button" data-carousel-to="1" aria-label="Mostrar Koenigsegg" aria-current="false"></button>
-                <button type="button" data-carousel-to="2" aria-label="Mostrar McLaren Senna" aria-current="false"></button>
-                <button type="button" data-carousel-to="3" aria-label="Mostrar Mercedes-Benz" aria-current="false"></button>
-            </div>
-            <button class="elite-home-carousel__arrow" type="button" data-carousel-next aria-label="Proxima imagem">&rsaquo;</button>
-        </div>
     </section>
     <script>
         (() => {
             const carousel = document.querySelector('[data-elite-carousel]');
             if (!carousel) return;
             const slides = [...carousel.querySelectorAll('.elite-home-carousel__slide')];
-            const dots = [...carousel.querySelectorAll('[data-carousel-to]')];
             let activeIndex = 0;
             let timer;
             const showSlide = (index) => {
@@ -62,23 +54,11 @@ function eliteHomeEscape(mixed $value): string
                     slide.classList.toggle('is-active', active);
                     slide.setAttribute('aria-hidden', String(!active));
                 });
-                dots.forEach((dot, i) => {
-                    const active = i === activeIndex;
-                    dot.classList.toggle('is-active', active);
-                    dot.setAttribute('aria-current', String(active));
-                });
             };
             const restart = () => {
                 window.clearInterval(timer);
                 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = window.setInterval(() => showSlide(activeIndex + 1), 6000);
             };
-            carousel.querySelector('[data-carousel-prev]').addEventListener('click', () => { showSlide(activeIndex - 1); restart(); });
-            carousel.querySelector('[data-carousel-next]').addEventListener('click', () => { showSlide(activeIndex + 1); restart(); });
-            dots.forEach((dot) => dot.addEventListener('click', () => { showSlide(Number(dot.dataset.carouselTo)); restart(); }));
-            carousel.addEventListener('mouseenter', () => window.clearInterval(timer));
-            carousel.addEventListener('mouseleave', restart);
-            carousel.addEventListener('focusin', () => window.clearInterval(timer));
-            carousel.addEventListener('focusout', restart);
             restart();
         })();
     </script>
@@ -127,7 +107,8 @@ function eliteHomeEscape(mixed $value): string
             foreach ($marcas as [$nome, $slug, $arquivo]):
             ?>
                 <a class="elite-brand-tile flex min-h-28 flex-col items-center justify-center gap-2 p-2 text-center text-sm font-semibold text-gray-900" href="paginasdasmarcas/<?= eliteHomeEscape($slug) ?>.php">
-                    <img class="h-14 w-16 object-contain" src="../assets/imagens/logos/<?= rawurlencode($arquivo) ?>" alt="<?= eliteHomeEscape($nome) ?>" loading="lazy">
+                    <img class="h-14 w-16 object-contain" src="../assets/imagens/logos/<?= rawurlencode($arquivo) ?>" alt="" loading="lazy">
+                    <span class="elite-brand-tile__name"><?= eliteHomeEscape($nome) ?></span>
                 </a>
             <?php endforeach; ?>
         </div>
@@ -159,6 +140,12 @@ function eliteHomeEscape(mixed $value): string
                             <p class="elite-car-card__eyebrow"><?= eliteHomeEscape($carro->getMarca()) ?> · <?= $carro->getAno() ?></p>
                             <h3 class="elite-car-card__title"><?= eliteHomeEscape($carro->getModelo()) ?></h3>
                             <p class="elite-car-card__price">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></p>
+                            <dl class="elite-car-card__specs">
+                                <div><dt>Versão</dt><dd><?= eliteHomeEscape($carro->getVersao() ?: 'Sob consulta') ?></dd></div>
+                                <div><dt>Cor</dt><dd><?= eliteHomeEscape($carro->getCor() ?: 'Sob consulta') ?></dd></div>
+                                <div><dt>Câmbio</dt><dd><?= eliteHomeEscape($carro->getCambio() ?: 'Sob consulta') ?></dd></div>
+                                <div><dt>Combustível</dt><dd><?= eliteHomeEscape($carro->getCombustivel() ?: 'Sob consulta') ?></dd></div>
+                            </dl>
                             <a class="elite-car-card__button" href="detalhes.php?id=<?= rawurlencode((string) $carro->getId()) ?>">Ver detalhes</a>
                         </div>
                     </article>

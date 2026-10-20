@@ -14,7 +14,7 @@ function eliteEscape(mixed $value): string
     <title>ELITE | Catálogo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-car-specs">
 </head>
 <body class="elite-catalog-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
@@ -34,9 +34,9 @@ function eliteEscape(mixed $value): string
             <input class="rounded p-2 text-black" type="number" name="ano" min="1886" value="<?= eliteEscape($filtros['ano']) ?>">
         </label>
         <label class="grid gap-1">Combustível
-            <select class="rounded p-2 text-black" name="combustivel">
+            <select class="rounded p-2 text-black" name="combustivel" data-auto-submit-filter>
                 <option value="">Todos</option>
-                <?php foreach (['Gasolina', 'Diesel', 'Flex', 'Híbrido', 'Elétrico'] as $opcao): ?>
+                <?php foreach ($opcoesCombustivel as $opcao): ?>
                     <option value="<?= eliteEscape($opcao) ?>" <?= $filtros['combustivel'] === $opcao ? 'selected' : '' ?>><?= eliteEscape($opcao) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -48,9 +48,9 @@ function eliteEscape(mixed $value): string
             <input class="rounded p-2 text-black" type="number" name="preco_max" min="0" step="0.01" value="<?= eliteEscape($filtros['preco_max']) ?>">
         </label>
         <label class="grid gap-1">Câmbio
-            <select class="rounded p-2 text-black" name="cambio">
+            <select class="rounded p-2 text-black" name="cambio" data-auto-submit-filter>
                 <option value="">Todos</option>
-                <?php foreach (['Automático', 'Manual', 'Automatizado'] as $opcao): ?>
+                <?php foreach ($opcoesCambio as $opcao): ?>
                     <option value="<?= eliteEscape($opcao) ?>" <?= $filtros['cambio'] === $opcao ? 'selected' : '' ?>><?= eliteEscape($opcao) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -77,6 +77,12 @@ function eliteEscape(mixed $value): string
                         <h2 class="elite-car-card__title"><?= eliteEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></h2>
                         <p class="elite-car-card__eyebrow">Ano <?= eliteEscape($carro->getAno()) ?></p>
                         <p class="elite-car-card__price">R$ <?= number_format($carro->getPreco(), 2, ',', '.') ?></p>
+                        <dl class="elite-car-card__specs">
+                            <div><dt>Versão</dt><dd><?= eliteEscape($carro->getVersao() ?: 'Sob consulta') ?></dd></div>
+                            <div><dt>Cor</dt><dd><?= eliteEscape($carro->getCor() ?: 'Sob consulta') ?></dd></div>
+                            <div><dt>Câmbio</dt><dd><?= eliteEscape($carro->getCambio() ?: 'Sob consulta') ?></dd></div>
+                            <div><dt>Combustível</dt><dd><?= eliteEscape($carro->getCombustivel() ?: 'Sob consulta') ?></dd></div>
+                        </dl>
                         <?php if ($carro->getDescricao() !== null && $carro->getDescricao() !== ''): ?><p><?= eliteEscape($carro->getDescricao()) ?></p><?php endif; ?>
                         <a class="elite-car-card__button" href="detalhes.php?id=<?= rawurlencode((string) $carro->getId()) ?>">Ver detalhes</a>
                         <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -100,5 +106,10 @@ function eliteEscape(mixed $value): string
     <?php endif; ?>
 </main>
 <?php require dirname(__DIR__, 3) . '/includes/footer.php'; ?>
+<script>
+    document.querySelectorAll('[data-auto-submit-filter]').forEach((filtro) => {
+        filtro.addEventListener('change', () => filtro.form?.requestSubmit());
+    });
+</script>
 </body>
 </html>

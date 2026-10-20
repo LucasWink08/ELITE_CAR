@@ -73,6 +73,39 @@ CREATE TABLE IF NOT EXISTS carros (
     INDEX idx_carros_marca_modelo (marca, modelo)
 );
 
+CREATE TABLE IF NOT EXISTS solicitacoes_anuncios_veiculos (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    carro_id INT UNSIGNED NULL,
+    marca VARCHAR(80) NOT NULL,
+    modelo VARCHAR(120) NOT NULL,
+    ano SMALLINT UNSIGNED NOT NULL,
+    preco DECIMAL(14, 2) NOT NULL,
+    descricao TEXT NOT NULL,
+    quilometragem INT UNSIGNED NOT NULL,
+    cor VARCHAR(60) NOT NULL,
+    combustivel VARCHAR(40) NOT NULL,
+    cambio VARCHAR(60) NOT NULL,
+    versao VARCHAR(100) NULL,
+    motor VARCHAR(120) NOT NULL,
+    potencia SMALLINT UNSIGNED NOT NULL,
+    informacoes_adicionais TEXT NULL,
+    fotos_json LONGTEXT NOT NULL,
+    documento_crlv_path VARCHAR(500) NOT NULL,
+    documento_extra_path VARCHAR(500) NULL,
+    status ENUM('em_analise', 'aprovado', 'rejeitado') NOT NULL DEFAULT 'em_analise',
+    admin_observacao VARCHAR(1000) NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    revisado_em DATETIME NULL,
+    INDEX idx_anuncios_usuario_data (usuario_id, criado_em),
+    INDEX idx_anuncios_status_data (status, criado_em),
+    UNIQUE KEY uq_anuncios_carro (carro_id),
+    CONSTRAINT fk_anuncios_usuario FOREIGN KEY (usuario_id)
+        REFERENCES usuarios (id) ON DELETE CASCADE,
+    CONSTRAINT fk_anuncios_carro FOREIGN KEY (carro_id)
+        REFERENCES carros (id) ON DELETE SET NULL
+);
+
 CREATE TABLE IF NOT EXISTS agendamentos_test_drive (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT UNSIGNED NULL,
@@ -442,3 +475,115 @@ WHERE NOT EXISTS (SELECT 1 FROM carros WHERE marca = 'Porsche' AND modelo = 'gt3
 INSERT INTO carros (marca, modelo, ano, preco, imagem, descricao, quilometragem, combustivel, status)
 SELECT 'Porsche', 'taycan', 2021, 630000.00, 'assets/imagens/cars/porsche/porschetaycan1.jpg', 'Motorização: Motores elétricos Potência: Até 761 cv Velocidade máxima: 260 km/h Aceleração 0-100 km/h: 5,4 a 2,8 segundos', 500, NULL, 'disponivel'
 WHERE NOT EXISTS (SELECT 1 FROM carros WHERE marca = 'Porsche' AND modelo = 'taycan' AND ano = 2021 AND imagem = 'assets/imagens/cars/porsche/porschetaycan1.jpg');
+
+UPDATE carros
+SET cor = CASE
+        WHEN imagem = 'assets/imagens/cars/audi/2023-audi-r8-gt-front-three-quarters-motion-3-1664827965.avif' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/audi/audi-rs6-avant-gt.jpg' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/audi/audi-tt rs.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/audi/mtmrs6evo.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/audi/nova-audi-rs6-avant-performance-frente.webp' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/audi/RS3 Sportback 12021.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/audi/rs4-avant_2.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/audi/rs7 2025.avif' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/audi/image.png' THEN 'Amarelo'
+        WHEN imagem = 'assets/imagens/cars/audi/rs32025.png' THEN 'Verde'
+        WHEN imagem = 'assets/imagens/cars/bmw/bmw i8.webp' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/bmw/bmw-i7-m70.jpg' THEN 'Laranja'
+        WHEN imagem = 'assets/imagens/cars/bmw/BMW-X4-M40i-Individual_1.jpg' THEN 'Roxo'
+        WHEN imagem = 'assets/imagens/cars/bmw/BMWM3G80CS.png' THEN 'Verde'
+        WHEN imagem = 'assets/imagens/cars/bmw/m4competition.jpg' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/bmw/M4gts.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/bugatti/veyron.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/bugatti/Bugatti-Veyron-2015 (1).jpg' THEN 'Bronze'
+        WHEN imagem = 'assets/imagens/cars/bugatti/eb110.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/bugatti/divo2.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/ferrari/f8spider.jpg' THEN 'Amarelo'
+        WHEN imagem = 'assets/imagens/cars/ferrari/Ferrari 458 Italia.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/ferrari/ferrari-488 pista.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/ferrari/ferrari-purosangue-divulgacao1.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/ferrari/laferrari.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/CC850.webp' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/ccx.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/destaques/golden.jpg' THEN 'Dourado'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/Jesko+Odin+Front.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/ragera.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/ageraR.jpg' THEN 'Roxo'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/Koenigsegg_Jesko_Genf_2019_1Y7A5546.jpg' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/koenigsegg/jeskoabsolut.png' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/aventador2021.jpg' THEN 'Roxo'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/huracen2018.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/inovacoes-que-o-Lamborghini-Aventador.jpg' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/lamborghini-gallardo-5795139_1280.jpg' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/lamborghini-urus-s.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/urus2024.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/lamborghini/lamborghini-huracan-sto.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/mclaren/659scan-amspider.webp' THEN 'Vermelho'
+        WHEN imagem = 'assets/imagens/cars/mclaren/McLaren_Senna_Genf_2018.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/mclaren/McLaren_Senna_GTR_Image_Front_Three_Quarters_crop-2x1.webp' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/mclaren/MClarneP1.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/mclaren/solusgt.webp' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/mclaren/speedtail.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/mercedes/a200amg.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/mercedes/AMGcle53.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/mercedes/amggt63s.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/mercedes/c300.jpg' THEN 'Branco'
+        WHEN imagem = 'assets/imagens/cars/mercedes/cls63amg.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/mercedes/gla2021.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/mercedes/Mercedes-AMG-GT-63S-E-Performance-e-hibrido-plug-in-mais-rapido-da-historia-da-Mercedes.png' THEN 'Laranja'
+        WHEN imagem = 'assets/imagens/cars/mercedes/Mercedes-Benz_SLR_McLaren_2.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/porsche/2017-porsche-718-cayman.jpg' THEN 'Azul'
+        WHEN imagem = 'assets/imagens/cars/porsche/911gt1s.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/porsche/porsche-718-spyder-rs-br.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/porsche/porsche-911-gt2-rs.jpg' THEN 'Preto'
+        WHEN imagem = 'assets/imagens/cars/porsche/porsche-cayenne-2023.jpg' THEN 'Cinza'
+        WHEN imagem = 'assets/imagens/cars/porsche/Porsche_918_Spyder_IAA_2013.jpg' THEN 'Prata'
+        WHEN imagem = 'assets/imagens/cars/porsche/porschetaycan1.jpg' THEN 'Vermelho'
+        ELSE 'Conforme fotos do anúncio'
+    END
+WHERE status = 'disponivel'
+  AND imagem LIKE 'assets/imagens/cars/%'
+  AND (cor IS NULL OR TRIM(cor) = '');
+
+
+-- Preenche os campos ainda vazios dos anúncios de catálogo. O bloco pode ser reaplicado.
+UPDATE carros
+SET
+    combustivel = COALESCE(NULLIF(TRIM(combustivel), ''), CASE
+        WHEN LOWER(CONCAT(marca, '|', modelo)) = 'bmw|i8 motor híbrido' THEN 'Híbrido'
+        WHEN LOWER(CONCAT(marca, '|', modelo)) = 'bmw|i7 m70 xdrive' THEN 'Elétrico'
+        WHEN LOWER(CONCAT(marca, '|', modelo)) IN (
+            'ferrari|296 gtb', 'ferrari|fxxk evo', 'ferrari|la ferrari', 'ferrari|sf90',
+            'koenigsegg|ragera',
+            'mclaren|p1', 'mclaren|p1 gtr', 'mclaren|speedtail',
+            'porsche|918 spider'
+        ) THEN 'Híbrido'
+        WHEN LOWER(marca) = 'porsche' AND LOWER(modelo) = 'taycan' THEN 'Elétrico'
+        WHEN LOWER(marca) = 'mercedes-benz'
+            AND LOWER(modelo) = 'mercedes amg gt63s'
+            AND imagem LIKE '%E-Performance%' THEN 'Híbrido'
+        ELSE 'Gasolina'
+    END),
+    cambio = COALESCE(NULLIF(TRIM(cambio), ''), CASE
+        WHEN LOWER(CONCAT(marca, '|', modelo)) IN (
+            'ferrari|f40 v8 biturbo', 'koenigsegg|ccx',
+            'mclaren|f1', 'porsche|911 gt1s'
+        ) THEN 'Manual'
+        WHEN LOWER(CONCAT(marca, '|', modelo)) IN (
+            'bmw|x4 m40i', 'bmw|x6 competition', 'bmw|i7 m70 xdrive',
+            'mercedes-benz|mercedes amg e63s', 'mercedes-benz|mercedes a200amg',
+            'mercedes-benz|mercedes amg cle53', 'mercedes-benz|mercedes amg gt63s',
+            'mercedes-benz|mercedes c300', 'mercedes-benz|mercedes cls63amg',
+            'mercedes-benz|mercedes gla', 'mercedes-benz|mercedes slr mclaren',
+            'porsche|panamera', 'porsche|cayenne', 'porsche|macan', 'porsche|taycan'
+        ) THEN 'Automático'
+        ELSE 'Automatizado'
+    END),
+    cor = COALESCE(NULLIF(TRIM(cor), ''), 'Conforme fotos do anúncio'),
+    versao = COALESCE(NULLIF(TRIM(versao), ''), CASE
+        WHEN LOWER(CONCAT(marca, '|', modelo)) = 'koenigsegg|ragera' THEN 'Regera'
+        WHEN LOWER(CONCAT(marca, '|', modelo)) = 'koenigsegg|one 1' THEN 'One:1'
+        ELSE UPPER(TRIM(modelo))
+    END)
+WHERE status = 'disponivel'
+  AND imagem LIKE 'assets/imagens/cars/%';

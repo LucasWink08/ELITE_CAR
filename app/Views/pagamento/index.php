@@ -11,151 +11,175 @@ function elitePagamentoEscape(mixed $value): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090a0c">
     <title>ELITE | Formas de pagamento</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
     <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/pagamento.css">
+    <?php if ($carro !== null): ?>
+        <script src="../assets/js/pagamento.js" defer></script>
+    <?php endif; ?>
 </head>
-<body class="min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
+<body class="elite-payment-page">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
-<main class="mx-auto max-w-5xl space-y-8 p-6 sm:p-8">
-    <h1 class="text-center text-4xl">Formas de pagamento</h1>
+<main class="payment-shell">
+    <header class="payment-heading">
+        <p class="payment-eyebrow">ELITE · COMPRA SEGURA</p>
+        <h1>Formas de pagamento</h1>
+        <p>Conheça as opções para este veículo e monte uma estimativa de financiamento.</p>
+    </header>
 
     <?php if ($erroBanco !== null): ?>
-        <p class="rounded bg-red-900 p-4 text-center" role="alert"><?= elitePagamentoEscape($erroBanco) ?></p>
+        <p class="payment-alert payment-alert--error" role="alert"><?= elitePagamentoEscape($erroBanco) ?></p>
     <?php elseif ($carro === null): ?>
-        <p class="rounded bg-gray-800 p-5 text-center">Veículo não encontrado ou indisponível.</p>
-        <p class="text-center"><a class="underline" href="paginadecompra.php">Voltar ao catálogo</a></p>
+        <section class="payment-empty">
+            <span class="payment-empty__icon" aria-hidden="true">!</span>
+            <h2>Veículo indisponível</h2>
+            <p>Não encontramos este veículo ou ele não está mais disponível no estoque.</p>
+            <a class="payment-button payment-button--primary" href="paginadecompra.php">Voltar ao catálogo</a>
+        </section>
     <?php else: ?>
-        <?php if ($mensagemIntencao !== null): ?><p class="rounded bg-green-900 p-4" role="status"><?= elitePagamentoEscape($mensagemIntencao) ?></p><?php endif; ?>
-        <?php if ($erroIntencao !== null): ?><p class="rounded bg-red-900 p-4" role="alert"><?= elitePagamentoEscape($erroIntencao) ?></p><?php endif; ?>
-        <?php $preco = $carro->getPreco(); ?>
-        <section class="elite-car-card">
-            <?php if ($carro->getImagem() !== null && $carro->getImagem() !== ''): ?>
-                <img class="elite-car-card__image" src="<?= elitePagamentoEscape('../' . ltrim($carro->getImagem(), '/')) ?>" alt="<?= elitePagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?>" loading="lazy">
-            <?php else: ?>
-                <div class="elite-car-card__placeholder">Imagem indisponível</div>
-            <?php endif; ?>
-            <div class="elite-car-card__content">
-                <h2 class="elite-car-card__title"><?= elitePagamentoEscape($carro->getMarca() . ' ' . $carro->getModelo()) ?></h2>
-                <p class="elite-car-card__eyebrow">Ano <?= $carro->getAno() ?></p>
-                <p class="elite-car-card__price">Preço integral: <span id="preco-integral">R$ <?= number_format($preco, 2, ',', '.') ?></span></p>
-                <p class="elite-car-card__meta">As condições e a disponibilidade devem ser confirmadas com a concessionária.</p>
+        <?php
+        $preco = (float) $carro->getPreco();
+        $imagem = $carro->getImagem();
+        $nomeCarro = trim($carro->getMarca() . ' ' . $carro->getModelo());
+        ?>
+
+        <?php if ($mensagemIntencao !== null): ?>
+            <p class="payment-alert payment-alert--success" role="status"><?= elitePagamentoEscape($mensagemIntencao) ?></p>
+        <?php endif; ?>
+        <?php if ($erroIntencao !== null): ?>
+            <p class="payment-alert payment-alert--error" role="alert"><?= elitePagamentoEscape($erroIntencao) ?></p>
+        <?php endif; ?>
+
+        <section class="payment-vehicle" aria-labelledby="payment-vehicle-title">
+            <div class="payment-vehicle__media">
+                <?php if ($imagem !== null && $imagem !== ''): ?>
+                    <img src="<?= elitePagamentoEscape('../' . ltrim($imagem, '/')) ?>" alt="<?= elitePagamentoEscape($nomeCarro) ?>" fetchpriority="high">
+                <?php else: ?>
+                    <div class="payment-vehicle__placeholder" aria-label="Imagem indisponível"><span>ELITE</span></div>
+                <?php endif; ?>
+            </div>
+            <div class="payment-vehicle__body">
+                <p class="payment-eyebrow">VEÍCULO SELECIONADO</p>
+                <h2 id="payment-vehicle-title"><?= elitePagamentoEscape($nomeCarro) ?></h2>
+                <span class="payment-year">ANO <?= (int) $carro->getAno() ?></span>
+                <div class="payment-vehicle__price">
+                    <span>Preço anunciado</span>
+                    <strong>R$ <?= number_format($preco, 2, ',', '.') ?></strong>
+                </div>
+                <p class="payment-vehicle__note">Preço sujeito à confirmação de disponibilidade e condições comerciais.</p>
             </div>
         </section>
 
-        <section>
-            <h2 class="mb-4 text-2xl font-semibold">Opções para este veículo</h2>
-            <div class="grid gap-4 sm:grid-cols-2">
-                <article class="rounded-xl bg-gray-800 p-5">
-                    <h3 class="text-xl font-semibold">À vista</h3>
-                    <p class="mt-2">Pagamento integral de <strong>R$ <?= number_format($preco, 2, ',', '.') ?></strong>. Nenhum desconto à vista foi presumido.</p>
+        <section class="payment-methods" aria-labelledby="payment-methods-title">
+            <div class="payment-section-heading">
+                <div>
+                    <p class="payment-eyebrow">ESCOLHA COMO PAGAR</p>
+                    <h2 id="payment-methods-title">Opções para este veículo</h2>
+                </div>
+            </div>
+            <div class="payment-method-grid">
+                <article class="payment-method">
+                    <span class="payment-method__icon" aria-hidden="true">R$</span>
+                    <div><h3>À vista</h3><p>Pagamento integral do valor anunciado.</p></div>
+                    <strong>R$ <?= number_format($preco, 2, ',', '.') ?></strong>
+                    <small>Sem desconto presumido. Consulte as condições.</small>
                 </article>
-                <article class="rounded-xl bg-gray-800 p-5">
-                    <h3 class="text-xl font-semibold">PIX</h3>
-                    <p class="mt-2">Referência de <strong>R$ <?= number_format($preco, 2, ',', '.') ?></strong>, sujeita à confirmação dos dados e da disponibilidade pela concessionária.</p>
+                <article class="payment-method">
+                    <span class="payment-method__icon" aria-hidden="true">◇</span>
+                    <div><h3>PIX</h3><p>Uma opção prática para pagamento integral.</p></div>
+                    <strong>Consulte a concessionária</strong>
+                    <small>Confirme os dados de pagamento diretamente com a equipe.</small>
                 </article>
-                <article class="rounded-xl bg-gray-800 p-5">
-                    <h3 class="text-xl font-semibold">Cartão</h3>
-                    <p class="mt-2">Consulte a administradora e a concessionária sobre limite, número de parcelas e eventuais encargos.</p>
+                <article class="payment-method">
+                    <span class="payment-method__icon" aria-hidden="true">▤</span>
+                    <div><h3>Cartão</h3><p>Consulte as possibilidades de pagamento.</p></div>
+                    <strong>Condições sob consulta</strong>
+                    <small>Limite, parcelas e encargos dependem da administradora.</small>
                 </article>
-                <article class="rounded-xl bg-gray-800 p-5">
-                    <h3 class="text-xl font-semibold">Financiamento</h3>
-                    <p class="mt-2">Simule abaixo com entrada, taxa mensal e prazos. A aprovação e a taxa efetiva dependem da instituição financeira.</p>
+                <article class="payment-method payment-method--featured">
+                    <span class="payment-method__icon" aria-hidden="true">↗</span>
+                    <div><h3>Financiamento</h3><p>Personalize a entrada, a taxa e o prazo.</p></div>
+                    <a href="#simulador">Simular parcelas <span aria-hidden="true">↓</span></a>
+                    <small>Estimativa informativa; sujeita à análise de crédito.</small>
                 </article>
             </div>
         </section>
 
-        <section class="rounded-xl bg-white p-6 text-black shadow-lg" data-preco="<?= number_format($preco, 2, '.', '') ?>" id="simulador">
-            <h2 class="text-2xl font-semibold">Simular parcelas</h2>
-            <p class="mt-1 text-gray-700">Estimativa informativa calculada sobre o preço deste veículo.</p>
-            <div class="mt-5 grid gap-4 sm:grid-cols-2">
-                <label class="grid gap-1" for="entrada">Entrada (R$)
-                    <input class="rounded border border-gray-400 p-2" type="number" id="entrada" min="0" max="<?= number_format($preco, 2, '.', '') ?>" step="0.01" value="0">
-                </label>
-                <label class="grid gap-1" for="juros">Juros mensais estimados (%)
-                    <input class="rounded border border-gray-400 p-2" type="number" id="juros" min="0" max="10" step="0.01" value="1.50">
-                </label>
+        <section class="payment-calculator" id="simulador" data-preco="<?= number_format($preco, 2, '.', '') ?>" data-taxa-anual="26.42" aria-labelledby="simulator-title">
+            <div class="payment-calculator__header">
+                <div>
+                    <p class="payment-eyebrow">SIMULAÇÃO PERSONALIZADA</p>
+                    <h2 id="simulator-title">Encontre uma parcela que faça sentido</h2>
+                    <p>Altere os valores para comparar cenários estimados de financiamento.</p>
+                </div>
+                <span class="payment-calculator__badge"><span aria-hidden="true">●</span> Sistema Price</span>
             </div>
-            <p id="aviso-simulacao" class="mt-3 hidden rounded bg-red-100 p-3 text-red-800" role="alert"></p>
-            <div id="opcoes-parcelamento" class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite"></div>
-            <p class="mt-5 text-sm text-gray-600">O valor final pode variar conforme análise de crédito, tarifas, seguros e condições oferecidas pela instituição. Esta página não realiza pagamento nem solicita dados de cartão.</p>
+
+            <div class="payment-input-grid payment-input-grid--fixed-rate">
+                <div class="payment-field payment-field--entry">
+                    <label for="entrada">Valor de entrada</label>
+                    <div class="payment-input-wrap"><span aria-hidden="true">R$</span><input type="number" id="entrada" min="0" max="<?= number_format($preco, 2, '.', '') ?>" step="1000" value="0" inputmode="decimal" aria-describedby="entrada-ajuda"></div>
+                    <input class="payment-range" type="range" id="entrada-range" min="0" max="100" value="0" aria-label="Percentual do preço como entrada">
+                    <div class="payment-field__helper" id="entrada-ajuda"><span>Entrada como percentual do veículo</span><strong id="entrada-percentual">0%</strong></div>
+                </div>
+                <article class="payment-rate-card" aria-label="Taxa fixa de referência do Banco Central">
+                    <span class="payment-rate-card__icon" aria-hidden="true">BCB</span>
+                    <div>
+                        <p class="payment-rate-card__label">Taxa fixa de referência</p>
+                        <strong>1,97% <span>ao mês</span></strong>
+                        <p>Média nacional para financiamento de veículos por pessoa física · ago/2026</p>
+                        <a href="https://dadosabertos.bcb.gov.br/dataset/25471-taxa-media-mensal-de-juros-das-operacoes-de-credito-com-recursos-livres---pessoas-fisicas---a">Fonte: Banco Central do Brasil <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="payment-summary" aria-live="polite">
+                <div><span>Valor do veículo</span><strong id="resumo-preco">R$ <?= number_format($preco, 2, ',', '.') ?></strong></div>
+                <div><span>Entrada</span><strong id="resumo-entrada">R$ 0,00</strong></div>
+                <div><span>Saldo financiado</span><strong id="saldo-financiado">R$ <?= number_format($preco, 2, ',', '.') ?></strong></div>
+                <div><span>Taxa anual equivalente</span><strong id="juros-anual">26,42% a.a.</strong></div>
+            </div>
+
+            <div class="payment-results-heading">
+                <div><h3>Compare os prazos</h3><p>Parcelas fixas calculadas pelo Sistema Price.</p></div>
+                <span>12 a 60 meses</span>
+            </div>
+            <p id="aviso-simulacao" class="payment-alert payment-alert--error" role="alert" hidden></p>
+            <div id="opcoes-parcelamento" class="payment-results" aria-live="polite" aria-atomic="false"></div>
+
+            <div class="payment-disclaimer">
+                <span aria-hidden="true">i</span>
+                <p>Simulação estimada, sem compromisso de aprovação. O custo efetivo pode variar após análise da instituição financeira e incluir tarifas, seguros, impostos ou outros encargos. Confirme a proposta final com a concessionária.</p>
+            </div>
         </section>
-        <section class="rounded-xl bg-gray-800 p-6" aria-labelledby="titulo-interesse">
-            <h2 id="titulo-interesse" class="text-2xl font-semibold">Tenho interesse neste veículo</h2>
+
+        <section class="payment-contact" aria-labelledby="titulo-interesse">
+            <div class="payment-contact__intro">
+                <p class="payment-eyebrow">ATENDIMENTO ELITE</p>
+                <h2 id="titulo-interesse">Quer conversar sobre este veículo?</h2>
+                <p>Nossa equipe pode confirmar disponibilidade e apresentar as condições atuais.</p>
+            </div>
             <?php if (isset($_SESSION['usuario_id'])): ?>
-                <form method="post" action="pagamento.php?id=<?= (int) $carro->getId() ?>" class="mt-4 space-y-3">
+                <form method="post" action="pagamento.php?id=<?= (int) $carro->getId() ?>" class="payment-contact__form">
                     <input type="hidden" name="csrf_token" value="<?= elitePagamentoEscape($csrfToken) ?>">
                     <input type="hidden" name="carro_id" value="<?= (int) $carro->getId() ?>">
-                    <label class="grid gap-1" for="mensagem-interesse">Mensagem (opcional)
-                        <textarea class="rounded border border-gray-300 p-3 text-black" id="mensagem-interesse" name="mensagem" rows="3" maxlength="1000" placeholder="Conte como prefere ser contatado ou tire uma dúvida."></textarea>
-                    </label>
-                    <button class="rounded bg-amber-400 px-5 py-3 font-semibold text-black hover:bg-amber-300" type="submit">Enviar intenção de compra</button>
+                    <label for="mensagem-interesse">Mensagem <span>(opcional)</span></label>
+                    <textarea id="mensagem-interesse" name="mensagem" rows="3" maxlength="1000" placeholder="Conte como prefere ser contatado ou tire uma dúvida."></textarea>
+                    <button class="payment-button payment-button--primary" type="submit">Solicitar contato <span aria-hidden="true">→</span></button>
                 </form>
             <?php else: ?>
-                <p class="mt-2">Entre na sua conta para enviar uma intenção de compra.</p>
-                <a class="mt-3 inline-block underline" href="entrar.php">Entrar</a>
+                <div class="payment-contact__signin">
+                    <p>Entre na sua conta para registrar seu interesse e receber atendimento.</p>
+                    <a class="payment-button payment-button--primary" href="entrar.php">Entrar na minha conta <span aria-hidden="true">→</span></a>
+                </div>
             <?php endif; ?>
         </section>
-        <p class="text-center"><a class="underline" href="detalhes.php?id=<?= (int) $carro->getId() ?>">Voltar aos detalhes do veículo</a></p>
+        <p class="payment-back"><a href="detalhes.php?id=<?= (int) $carro->getId() ?>"><span aria-hidden="true">←</span> Voltar aos detalhes do veículo</a></p>
     <?php endif; ?>
 </main>
 <?php require dirname(__DIR__, 3) . '/includes/footer.php'; ?>
-<?php if ($carro !== null): ?>
-<script>
-(() => {
-    const painel = document.getElementById('simulador');
-    const entradaInput = document.getElementById('entrada');
-    const jurosInput = document.getElementById('juros');
-    const opcoes = document.getElementById('opcoes-parcelamento');
-    const aviso = document.getElementById('aviso-simulacao');
-    const preco = Number(painel.dataset.preco);
-    const prazos = [12, 24, 36, 48, 60];
-    const moeda = valor => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
-
-    function atualizar() {
-        const entrada = Number(entradaInput.value);
-        const taxaPercentual = Number(jurosInput.value);
-        if (!Number.isFinite(entrada) || entrada < 0 || entrada > preco || !Number.isFinite(taxaPercentual) || taxaPercentual < 0 || taxaPercentual > 10) {
-            aviso.textContent = 'Informe uma entrada entre R$ 0,00 e o preço do veículo e juros entre 0% e 10% ao mês.';
-            aviso.classList.remove('hidden');
-            opcoes.replaceChildren();
-            return;
-        }
-        aviso.classList.add('hidden');
-        const saldo = preco - entrada;
-        const taxa = taxaPercentual / 100;
-        opcoes.replaceChildren();
-
-        const aVista = document.createElement('article');
-        aVista.className = 'rounded-lg border border-gray-300 p-4';
-        aVista.innerHTML = `<h3 class="font-semibold">À vista</h3><p class="mt-2">${moeda(preco)}</p>`;
-        opcoes.append(aVista);
-
-        prazos.forEach(prazo => {
-            const parcela = taxa === 0
-                ? saldo / prazo
-                : saldo * taxa / (1 - Math.pow(1 + taxa, -prazo));
-            const totalFinanciado = parcela * prazo;
-            const totalComEntrada = totalFinanciado + entrada;
-            const card = document.createElement('article');
-            card.className = 'rounded-lg border border-gray-300 p-4';
-            const titulo = document.createElement('h3');
-            titulo.className = 'font-semibold';
-            titulo.textContent = `${prazo} parcelas de ${moeda(parcela)}`;
-            const detalhes = document.createElement('p');
-            detalhes.className = 'mt-2 text-sm text-gray-700';
-            detalhes.textContent = `Saldo financiado: ${moeda(saldo)}. Total das parcelas com juros: ${moeda(totalFinanciado)}. Total com entrada: ${moeda(totalComEntrada)}.`;
-            card.append(titulo, detalhes);
-            opcoes.append(card);
-        });
-    }
-
-    entradaInput.addEventListener('input', atualizar);
-    jurosInput.addEventListener('input', atualizar);
-    atualizar();
-})();
-</script>
-<?php endif; ?>
 </body>
 </html>

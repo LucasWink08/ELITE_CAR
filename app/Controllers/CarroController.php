@@ -13,6 +13,8 @@ final class CarroController
     public function index(): void
     {
         $carros = [];
+        $opcoesCombustivel = [];
+        $opcoesCambio = [];
         $erroBanco = null;
         $filtros = [
             'termo' => trim((string) ($_GET['termo'] ?? '')),
@@ -26,7 +28,10 @@ final class CarroController
         ];
 
         try {
-            $carros = (new Carro())->buscarDisponiveis($filtros);
+            $repositorio = new Carro();
+            $opcoesCombustivel = $repositorio->listarOpcoesFiltro('combustivel');
+            $opcoesCambio = $repositorio->listarOpcoesFiltro('cambio');
+            $carros = $repositorio->buscarDisponiveis($filtros);
         } catch (Throwable $exception) {
             // A mensagem detalhada fica no log do servidor, sem expor credenciais ou SQL.
             error_log($exception->getMessage());
@@ -41,6 +46,7 @@ final class CarroController
     {
         $csrfToken = Csrf::token();
         $carro = null;
+        $fotosAnuncio = [];
         $erroBanco = null;
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $imagem = $_GET['imagem'] ?? null;
@@ -56,6 +62,11 @@ final class CarroController
                     : $repositorio->buscarPorImagem($imagem);
                 if ($carroEncontrado !== null && $carroEncontrado->getStatus() === 'disponivel') {
                     $carro = $carroEncontrado;
+                    try {
+                        $fotosAnuncio = (new \Elite\Models\AnuncioVeiculoRepository())->fotosPublicasPorCarro((int) $carro->getId());
+                    } catch (Throwable $exception) {
+                        // A galeria enviada pelo anunciante é complementar ao catálogo legado.
+                    }
                     if (isset($_SESSION['usuario_id']) && is_int($_SESSION['usuario_id'])) {
                         try {
                             (new InteracaoRepository())->registrarVisualizacao($_SESSION['usuario_id'], $carro->getId());

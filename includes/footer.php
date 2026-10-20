@@ -1,7 +1,9 @@
 <footer class="mt-12 border-t border-white/10 bg-black text-white">
     <div class="mx-auto grid max-w-7xl gap-8 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
         <div class="sm:col-span-2">
-            <a href="homepage.php" class="elite-wordmark text-2xl font-black tracking-widest text-amber-400">ELITE</a>
+            <a href="homepage.php" class="elite-footer__brand" aria-label="ELITE Autom&oacute;veis, p&aacute;gina inicial">
+                <img src="../assets/imagens/logos/sem%20fundo.png" alt="ELITE Autom&oacute;veis" width="220" height="230" loading="lazy">
+            </a>
             <p class="mt-3 max-w-lg text-sm leading-6 text-gray-300">Concessionária de veículos premium. Consulte a disponibilidade dos modelos e fale com nossa equipe para conhecer as condições de compra.</p>
         </div>
         <div>

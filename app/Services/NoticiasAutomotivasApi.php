@@ -16,7 +16,7 @@ final class NoticiasAutomotivasApi
         }
 
         $query = http_build_query([
-            'title' => 'Automotive News',
+            'query' => '(carro OR carros OR automóvel OR automóveis OR automotivo OR automotiva OR veículo OR veículos OR montadora OR montadoras OR automobilismo OR "Fórmula 1" OR elétrico OR elétricos)',
             'language.code' => 'pt',
             'per_page' => 10,
             'page' => 1,

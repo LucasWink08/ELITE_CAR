@@ -12,6 +12,22 @@ function eliteDetalhesSlug(string $value): string
     return strtolower((string) preg_replace('/[^a-z0-9]+/i', '', $ascii === false ? $value : $ascii));
 }
 
+function eliteDetalhesImagemAdequada(string $caminho): bool
+{
+    if (!is_file($caminho)) {
+        return false;
+    }
+
+    $dimensoes = @getimagesize($caminho);
+    if ($dimensoes !== false) {
+        return $dimensoes[0] >= 960 && $dimensoes[1] >= 540;
+    }
+
+    // Algumas instalações do PHP/GD não leem AVIF, embora o navegador consiga exibi-lo.
+    return strtolower(pathinfo($caminho, PATHINFO_EXTENSION)) === 'avif'
+        && (filesize($caminho) ?: 0) >= 20 * 1024;
+}
+
 /** Fotos diretas encontradas no Google Imagens, usadas somente quando a pasta local não tem aquele tipo de foto. */
 function eliteDetalhesFotosComplementares(string $marcaSlug, string $modeloSlug): array
 {
@@ -44,7 +60,7 @@ function eliteDetalhesFotosComplementares(string $marcaSlug, string $modeloSlug)
     return $fotos[$marcaSlug . ':' . $modeloSlug] ?? [];
 }
 /** @return array<int, array{tipo:string,src?:string,href?:string,alt:string,legenda:string,origem?:string}> */
-function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
+function eliteDetalhesGaleria(\Elite\Entities\Carro $carro, array $fotosAnuncio = []): array
 {
     $galeria = [];
     $marca = $carro->getMarca();
@@ -61,9 +77,12 @@ function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
             && !str_contains($imagemPrincipal, '..')
             && is_file(dirname(__DIR__, 3) . '/' . ltrim($imagemPrincipal, '/'))
         ) {
-            $partes = explode('/', ltrim($imagemPrincipal, '/'));
-            $urlLocal = '../' . implode('/', array_map('rawurlencode', $partes));
-            $galeria[] = ['tipo' => 'imagem', 'src' => $urlLocal, 'alt' => $nome, 'legenda' => 'Exterior'];
+            $caminhoImagemPrincipal = dirname(__DIR__, 3) . '/' . ltrim($imagemPrincipal, '/');
+            if (eliteDetalhesImagemAdequada($caminhoImagemPrincipal)) {
+                $partes = explode('/', ltrim($imagemPrincipal, '/'));
+                $urlLocal = '../' . implode('/', array_map('rawurlencode', $partes));
+                $galeria[] = ['tipo' => 'imagem', 'src' => $urlLocal, 'alt' => $nome, 'legenda' => 'Exterior'];
+            }
         }
     }
 
@@ -116,6 +135,9 @@ function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
             if (!is_file($arquivo) || !preg_match('/\.(avif|gif|jpe?g|png|webp)$/i', $arquivo)) {
                 continue;
             }
+            if (!eliteDetalhesImagemAdequada($arquivo)) {
+                continue;
+            }
             $nomeArquivo = basename($arquivo);
             $raizProjetoUrl = str_replace('\\', '/', dirname(__DIR__, 3));
             $caminhoArquivoUrl = str_replace('\\', '/', $arquivo);
@@ -149,6 +171,31 @@ function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
         static fn (array $foto): string => $normalizarCaminho((string) ($foto['src'] ?? '')),
         $galeria
     ), true);
+    foreach ($fotosAnuncio as $fotoAnuncio) {
+        if (!is_string($fotoAnuncio)
+            || !str_starts_with($fotoAnuncio, 'assets/imagens/cars/anuncios/')
+            || str_contains($fotoAnuncio, '..')
+            || !preg_match('/\.(avif|gif|jpe?g|png|webp)$/i', $fotoAnuncio)) {
+            continue;
+        }
+        $caminhoAbsoluto = dirname(__DIR__, 3) . '/' . $fotoAnuncio;
+        if (!is_file($caminhoAbsoluto)) {
+            continue;
+        }
+        $normalizado = $normalizarCaminho('../' . $fotoAnuncio);
+        if (!eliteDetalhesImagemAdequada($caminhoAbsoluto)
+            || isset($caminhosAdicionados[$normalizado])) {
+            continue;
+        }
+        $partes = explode('/', $fotoAnuncio);
+        $galeria[] = [
+            'tipo' => 'imagem',
+            'src' => '../' . implode('/', array_map('rawurlencode', $partes)),
+            'alt' => $nome . ' — foto enviada pelo anunciante',
+            'legenda' => count($galeria) === 1 ? 'Outro ângulo' : 'Foto do veículo',
+        ];
+        $caminhosAdicionados[$normalizado] = true;
+    }
     foreach ($alternativas as $alternativa) {
         $caminho = $normalizarCaminho((string) ($alternativa['src'] ?? ''));
         if ($caminho === '' || isset($caminhosAdicionados[$caminho])) {
@@ -187,7 +234,7 @@ function eliteDetalhesGaleria(\Elite\Entities\Carro $carro): array
 }
 
 $nomeVeiculo = $carro === null ? '' : trim($carro->getMarca() . ' ' . $carro->getModelo());
-$galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
+$galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro, $fotosAnuncio ?? []);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -197,7 +244,7 @@ $galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
     <meta name="description" content="<?= eliteDetalhesEscape($carro === null ? 'Detalhes dos veículos ELITE.' : 'Confira fotos, informações e condições do ' . $nomeVeiculo . '.') ?>">
     <title><?= eliteDetalhesEscape($carro === null ? 'ELITE | Veículo' : 'ELITE | ' . $nomeVeiculo) ?></title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-centered-gallery">
 </head>
 <body class="elite-vehicle-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>
@@ -231,7 +278,7 @@ $galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
             </div>
             <button class="elite-vehicle-gallery__arrow elite-vehicle-gallery__arrow--previous" type="button" data-gallery-previous aria-label="Foto anterior" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8592;</button>
             <button class="elite-vehicle-gallery__arrow elite-vehicle-gallery__arrow--next" type="button" data-gallery-next aria-label="Próxima foto" aria-controls="galeria-veiculo-<?= (int) $carro->getId() ?>">&#8594;</button>
-            <p class="elite-vehicle-gallery__count" aria-live="polite"><span data-gallery-current>01</span> / <?= str_pad((string) count($galeriaVeiculo), 2, '0', STR_PAD_LEFT) ?></p>
+            <p class="elite-vehicle-gallery__count" aria-live="polite"><span data-gallery-current>01</span> / <span data-gallery-total><?= str_pad((string) count($galeriaVeiculo), 2, '0', STR_PAD_LEFT) ?></span></p>
         </section>
 
         <div class="elite-vehicle-detail__layout">
@@ -326,26 +373,123 @@ $galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
     const previous = gallery?.querySelector('[data-gallery-previous]');
     const next = gallery?.querySelector('[data-gallery-next]');
     const current = gallery?.querySelector('[data-gallery-current]');
-    if (!gallery || !viewport || !track || !previous || !next || !current) return;
+    const total = gallery?.querySelector('[data-gallery-total]');
+    if (!gallery || !viewport || !track || !previous || !next || !current || !total) return;
 
     const items = () => Array.from(track.children);
-    const scrollStep = () => {
-        const first = items()[0];
-        if (!first) return viewport.clientWidth;
-        const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
-        return first.getBoundingClientRect().width + gap;
+    const activeSlideIndex = () => {
+        const center = viewport.getBoundingClientRect().left + viewport.clientWidth / 2;
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+        items().forEach((item, index) => {
+            const bounds = item.getBoundingClientRect();
+            const distance = Math.abs(bounds.left + bounds.width / 2 - center);
+            if (distance < closestDistance) {
+                closestIndex = index;
+                closestDistance = distance;
+            }
+        });
+        return closestIndex;
     };
     const update = () => {
-        const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-        const step = scrollStep();
-        const position = step > 0 ? Math.round(viewport.scrollLeft / step) : 0;
-        previous.disabled = viewport.scrollLeft <= 2;
-        next.disabled = viewport.scrollLeft >= maxScroll - 2;
-        current.textContent = String(Math.min(position + 1, items().length)).padStart(2, '0');
+        const slides = items();
+        if (!slides.length) return;
+        const selected = activeSlideIndex();
+        slides.forEach((slide, index) => slide.classList.toggle('is-active', index === selected));
+        total.textContent = String(slides.length).padStart(2, '0');
+        previous.disabled = selected === 0;
+        next.disabled = selected === slides.length - 1;
+        current.textContent = String(selected + 1).padStart(2, '0');
     };
 
-    previous.addEventListener('click', () => viewport.scrollBy({ left: -scrollStep(), behavior: 'smooth' }));
-    next.addEventListener('click', () => viewport.scrollBy({ left: scrollStep(), behavior: 'smooth' }));
+    const waitForImage = image => new Promise(resolve => {
+        image.loading = 'eager';
+        let timeout;
+        const finish = () => {
+            window.clearTimeout(timeout);
+            resolve();
+        };
+        const onError = () => {
+            if (image.dataset.fallbackAttempted && !image.complete) {
+                image.addEventListener('load', finish, { once: true });
+                image.addEventListener('error', finish, { once: true });
+                return;
+            }
+            finish();
+        };
+        image.addEventListener('load', finish, { once: true });
+        image.addEventListener('error', onError, { once: true });
+        timeout = window.setTimeout(finish, 4500);
+        if (image.complete) finish();
+    });
+    const imageFingerprint = image => {
+        if (!image.complete || image.naturalWidth === 0 || image.naturalHeight === 0) return null;
+        const canvas = document.createElement('canvas');
+        canvas.width = 9;
+        canvas.height = 8;
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        if (!context) return null;
+        try {
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+            const luminance = [];
+            for (let index = 0; index < pixels.length; index += 4) {
+                luminance.push((pixels[index] * 299 + pixels[index + 1] * 587 + pixels[index + 2] * 114) / 1000);
+            }
+            const hash = [];
+            for (let row = 0; row < 8; row++) {
+                for (let column = 0; column < 8; column++) {
+                    const pixel = row * 9 + column;
+                    hash.push(luminance[pixel] > luminance[pixel + 1]);
+                }
+            }
+            return { hash, resolution: image.naturalWidth * image.naturalHeight };
+        } catch (_) {
+            return null;
+        }
+    };
+    const fingerprintDistance = (left, right) => left.reduce((distance, bit, index) => distance + Number(bit !== right[index]), 0);
+    const removeRepeatedPhotos = async () => {
+        const photos = items()
+            .map(item => ({ item, image: item.querySelector('img'), fingerprint: null }))
+            .filter(photo => photo.image);
+        await Promise.all(photos.map(photo => waitForImage(photo.image)));
+
+        const uniquePhotos = [];
+        photos.forEach(photo => {
+            if (!photo.item.isConnected) return;
+            photo.fingerprint = imageFingerprint(photo.image);
+            if (!photo.fingerprint) {
+                uniquePhotos.push(photo);
+                return;
+            }
+            const duplicateIndex = uniquePhotos.findIndex(existing =>
+                existing.fingerprint && fingerprintDistance(photo.fingerprint.hash, existing.fingerprint.hash) <= 5
+            );
+            if (duplicateIndex === -1) {
+                uniquePhotos.push(photo);
+            } else if (photo.fingerprint.resolution > uniquePhotos[duplicateIndex].fingerprint.resolution) {
+                uniquePhotos[duplicateIndex].item.remove();
+                uniquePhotos[duplicateIndex] = photo;
+            } else {
+                photo.item.remove();
+            }
+        });
+        update();
+    };
+
+    const goToSlide = index => {
+        const slide = items()[index];
+        slide?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    };
+    previous.addEventListener('click', () => goToSlide(activeSlideIndex() - 1));
+    next.addEventListener('click', () => goToSlide(activeSlideIndex() + 1));
+    track.addEventListener('click', event => {
+        if (!(event.target instanceof Element) || event.target.closest('a')) return;
+        const slide = event.target.closest('.elite-vehicle-gallery__item');
+        if (!slide || slide.classList.contains('is-active')) return;
+        goToSlide(items().indexOf(slide));
+    });
     viewport.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     track.addEventListener('error', event => {
@@ -363,6 +507,7 @@ $galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro);
         update();
     }, true);
     update();
+    removeRepeatedPhotos();
 })();
 </script>
 <?php require dirname(__DIR__, 3) . '/includes/footer.php'; ?>

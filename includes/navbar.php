@@ -18,7 +18,7 @@ $elitePagina = static fn (string $pagina): string => $eliteBasePath . 'paginas/'
 <header class="elite-site-header">
     <nav class="elite-site-nav" aria-label="Navega&ccedil;&atilde;o principal" style="box-sizing:border-box;width:100%;max-width:none;margin:0">
         <a class="elite-site-nav__brand" href="<?= $eliteEscape($elitePagina('homepage.php')) ?>" aria-label="ELITE, p&aacute;gina inicial">
-            <img src="<?= $eliteEscape($eliteBasePath . 'assets/imagens/logos/site.png') ?>" width="180" height="64" style="width:min(180px,40vw);height:min(64px,14.22vw);max-width:none;object-fit:cover;object-position:center 68%" alt="" aria-hidden="true" draggable="false">
+            <img src="<?= $eliteEscape($eliteBasePath . 'assets/imagens/logos/coroa.png') ?>" width="100" height="72" alt="" aria-hidden="true" draggable="false" style="transform:translateY(-12px)">
         </a>
         <button class="elite-site-nav__toggle" type="button" data-elite-menu-toggle aria-controls="elite-menu" aria-expanded="false" aria-label="Abrir menu">
             <span aria-hidden="true">&#9776;</span>
@@ -39,6 +39,7 @@ $elitePagina = static fn (string $pagina): string => $eliteBasePath . 'paginas/'
                     <a href="<?= $eliteEscape($elitePagina('carrinho.php')) ?>">Carrinho</a>
                     <?php if (($_SESSION['usuario_tipo'] ?? null) === 'admin'): ?>
                         <a href="<?= $eliteEscape($elitePagina('admin_carros.php')) ?>">Administra&ccedil;&atilde;o</a>
+                        <a href="<?= $eliteEscape($elitePagina('admin_anuncios.php')) ?>">An&aacute;lise de an&uacute;ncios</a>
                     <?php endif; ?>
                     <form class="elite-site-nav__logout" action="<?= $eliteEscape($elitePagina('sair.php')) ?>" method="post">
                         <button type="submit">Sair</button>

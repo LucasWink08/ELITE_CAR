@@ -24,7 +24,7 @@ final class Conexao
         $port = getenv('ELITE_DB_PORT') ?: '3306';
         $nome = getenv('ELITE_DB_NAME') ?: 'elite';
         $usuario = getenv('ELITE_DB_USER') ?: 'root';
-        $senha = getenv('ELITE_DB_PASSWORD') ?: '';
+        $senha = getenv('ELITE_DB_PASSWORD') ?: 'lucas123';
         $dsn = "mysql:host={$host};port={$port};dbname={$nome};charset=utf8mb4";
 
         try {

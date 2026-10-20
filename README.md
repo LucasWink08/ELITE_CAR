@@ -24,7 +24,7 @@ Os arquivos em `docs/` nao sao carregados pela aplicacao. Os pontos de entrada `
 
 1. Instale/inicie MySQL ou MariaDB e habilite a extensão PHP `pdo_mysql` no XAMPP.
 2. Importe `database/schema.sql` no servidor MySQL/MariaDB. O arquivo cria as tabelas e inclui os veiculos de todas as nove paginas de marcas, alem dos veiculos iniciais.
-3. Para atualizar um banco que ja existe, execute `database/catalogo_completo.sql` uma vez. A migracao inclui os 90 anuncios das paginas de marcas no catalogo completo e evita reinserir o mesmo anuncio.
+3. Para atualizar um banco que ja existe, execute `database/catalogo_completo.sql`. O script inclui os 90 anuncios das paginas de marcas sem duplicar registros e preenche os dados de combustivel, cambio, cor e versao que estiverem vazios.
 4. Configure `ELITE_DB_HOST`, `ELITE_DB_PORT`, `ELITE_DB_NAME`, `ELITE_DB_USER` e `ELITE_DB_PASSWORD` no ambiente do PHP. Os padroes locais sao `127.0.0.1`, `3306`, `elite`, `root` e senha vazia.
 5. Cadastre veiculos na tabela `carros`. O campo `imagem` deve ser relativo a pasta `ELITE`, por exemplo `assets/imagens/cars/bmw/2020-bmw-x6-m-competition-1.webp`.
 
