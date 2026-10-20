@@ -14,7 +14,7 @@ function eliteEscape(mixed $value): string
     <title>ELITE | Catálogo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-car-specs">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
 </head>
 <body class="elite-catalog-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>

@@ -8,7 +8,7 @@ $rotulosStatusAnuncio = ['em_analise' => 'Em análise', 'aprovado' => 'Publicado
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELITE | Análise de anúncios</title>
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-anuncios">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
     <link rel="stylesheet" href="../assets/css/anunciar.css?v=20261019-anuncios">
     <style>
         .admin-anuncios-main{width:min(100% - 2rem,1180px);margin:0 auto;padding:3rem 0 5rem}

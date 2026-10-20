@@ -244,7 +244,7 @@ $galeriaVeiculo = $carro === null ? [] : eliteDetalhesGaleria($carro, $fotosAnun
     <meta name="description" content="<?= eliteDetalhesEscape($carro === null ? 'Detalhes dos veículos ELITE.' : 'Confira fotos, informações e condições do ' . $nomeVeiculo . '.') ?>">
     <title><?= eliteDetalhesEscape($carro === null ? 'ELITE | Veículo' : 'ELITE | ' . $nomeVeiculo) ?></title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-centered-gallery">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
 </head>
 <body class="elite-vehicle-page min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>

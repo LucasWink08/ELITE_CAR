@@ -21,7 +21,7 @@ if (count($partesNome) > 1) {
     <title>ELITE | Meu perfil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-profile-agenda-panel">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
 </head>
 <body class="min-h-screen bg-gradient-to-t from-black to-gray-900 text-white">
 <?php require dirname(__DIR__, 3) . '/includes/navbar.php'; ?>

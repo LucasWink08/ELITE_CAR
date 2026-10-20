@@ -14,7 +14,7 @@ function eliteHomeEscape(mixed $value): string
     <meta name="description" content="Encontre veículos premium na ELITE. Explore o catálogo e consulte os detalhes de cada modelo.">
     <title>ELITE | Veículos premium</title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261020-home-search">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="elite-home-page min-h-screen bg-gray-950 text-white">

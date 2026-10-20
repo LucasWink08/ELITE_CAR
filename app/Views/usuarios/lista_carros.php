@@ -16,7 +16,7 @@ $idsSelecionados = array_map(static fn (array $carro): int => (int) $carro['id']
     <title>ELITE | <?= eliteListaEscape($titulo) ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-compare-specs-top">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
     <?php if ($modo === 'favoritos'): ?><link rel="stylesheet" href="../assets/css/favoritos.css?v=20261019-ui"><?php endif; ?>
 </head>
 <body class="min-h-screen text-white<?= $modo === 'favoritos' ? '' : ' bg-gradient-to-t from-black to-gray-900' ?>">

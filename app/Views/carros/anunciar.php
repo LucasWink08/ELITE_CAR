@@ -17,7 +17,7 @@ $statusAnuncio = static fn (string $status): string => match ($status) {
     <meta name="description" content="Anuncie seu veículo premium na ELITE.">
     <title>ELITE | Anunciar veículo</title>
     <link rel="stylesheet" href="../assets/css/fonte.css">
-    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-anuncios">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20261019-forms-ui">
     <link rel="stylesheet" href="../assets/css/anunciar.css?v=20261019-anuncios">
 </head>
 <body class="elite-anunciar-page">
